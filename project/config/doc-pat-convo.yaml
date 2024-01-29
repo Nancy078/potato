@@ -53,7 +53,7 @@
       "on": True,
       "output_filename": 'task_assignment.json',
       "sampling_strategy": 'group_random',
-      "labels_per_instance": 9,
+      "labels_per_instance": 12,
       "instance_per_annotator": 1,
       "test_question_per_annotator": 0, # you must set up the test question in surveyflow to use this function
 
@@ -256,7 +256,7 @@
    
     # "html_layout": "../templates/Doctor-Patient-Conversation-Analysis- copy.html",
 
-    "html_layout": "../templates/Doctor-Patient-Conversation-Analysis- copy.html",
+    "html_layout": "../templates/layout.html",
 
     # The core UI files for Potato. You should not need to change these normally.
     #
@@ -267,7 +267,9 @@
     #
     # if you want to use your own template,
     # please replace the string as a path to the template
-    "base_html_template": "default",
+    # "base_html_template": "../../potato/templates/Doctor-Patient-Conversation-Analysis-base_template.html",
+    "base_html_template": "../templates/Dialogue-Analysis-Dialogue-Analysis-base_template copy.html",
+    #  "base_html_template": "default",
     "header_file": "default",
 
     # This is where the actual HTML files will be generated

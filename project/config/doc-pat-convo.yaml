@@ -31,7 +31,7 @@
         ],
       "pre_annotation": ['../surveyflow/instruction.jsonl'],
   
-      "post_annotation": ['../surveyflow/post_annotation_patient_race.jsonl'],
+      "post_annotation": ['../surveyflow/post_annotation_question.jsonl'],
       # If set, we will automatically generate testing questions similar to the annotation instances, but explicitly ask the annotator to choose one option
       "testing": [],
     },

@@ -1,1 +1,0 @@
-{"id":"1", "schema": "radio","text":"What race do you think the patient is? ", "choices": ["Black", "White", "Unsure"],  "label_requirement": {"required":true}}

@@ -600,16 +600,27 @@ def load_all_data(config):
 
         if fmt in ["json", "jsonl"]:
             with open(data_fname, "rt") as f:
-                for line_no, line in enumerate(f):
-                    item = json.loads(line)
+                data = json.load(f)
 
-                    # fix the encoding
+                for item in data:
+                    # fix the encoding if needed
                     # item[text_key] = item[text_key].encode("latin-1").decode("utf-8")
 
                     instance_id = item[id_key]
 
                     # TODO: check for duplicate instance_id
                     instance_id_to_data[instance_id] = item
+
+                # for line_no, line in enumerate(f):
+                #     item = json.loads(line)
+
+                #     # fix the encoding
+                #     # item[text_key] = item[text_key].encode("latin-1").decode("utf-8")
+
+                #     instance_id = item[id_key]
+
+                #     # TODO: check for duplicate instance_id
+                #     instance_id_to_data[instance_id] = item
 
         else:
             sep = "," if fmt == "csv" else "\t"
@@ -627,7 +638,7 @@ def load_all_data(config):
                 instance_id_to_data[instance_id] = item
             line_no = len(df)
 
-        logger.debug("Loaded %d instances from %s" % (line_no, data_fname))
+        # logger.debug("Loaded %d instances from %s" % (line_no, data_fname))
 
     # TODO Setup automatic test questions for each annotation schema,
     # currently we are doing it similar to survey flow to allow multilingual test questions
@@ -1300,7 +1311,7 @@ def sample_instances(username):
 
     # check if sampling strategy is specified in configuration, if not, set it as random
     if "sampling_strategy" not in config["automatic_assignment"] \
-           or config["automatic_assignment"]["sampling_strategy"] not in ['random','ordered']:
+           or config["automatic_assignment"]["sampling_strategy"] not in ['random','ordered','group_random']:
         logger.debug("Undefined sampling strategy, default to random assignment")
         config["automatic_assignment"]["sampling_strategy"] = "random"
 
@@ -1339,6 +1350,35 @@ def sample_instances(username):
                        : min(config["automatic_assignment"]["instance_per_annotator"], len(sorted_keys))
         ]
         #print(sampled_keys)
+
+   
+    elif config["automatic_assignment"]["sampling_strategy"] == "group_random":
+         ## example id: conv1013_1-snip8
+        ## here we first sample a random instance of a conversation
+        ## then we assign the user all ordered snippets of that conversation
+    
+       
+        unassigned_dict = task_assignment["unassigned"]
+        unassigned_dict = {
+            k: unassigned_dict[k]
+            for k in random.sample(list(unassigned_dict.keys()), len(unassigned_dict))
+        }
+        
+        sorted_keys = [
+            it[0] for it in sorted(unassigned_dict.items(), key=lambda item: item[1], reverse=True)
+        ]
+
+        sampled_convo_key = sorted_keys[
+            : min(config["automatic_assignment"]["instance_per_annotator"], len(sorted_keys))
+        ][0]
+
+        convo_key, _ = re.findall(r'(.*)-(.*)', sampled_convo_key)[0]
+
+        relevent_convo_snippet_keys = [k for k in unassigned_dict.keys() if convo_key in k]
+        # Sort the keys based on the numeric part after the hyphen (snippet)
+        sampled_keys = sorted(relevent_convo_snippet_keys, key=lambda x: int(x.split('-')[1][4:]))
+
+
 
     # update task_assignment to keep track of task assignment status globally
     for key in sampled_keys:

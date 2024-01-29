@@ -779,7 +779,265 @@
 
       <!--- LAYOUT GOES BELOW HERE --->
 
-      <div class="container">
+      <style>
+    * {
+        box-sizing: border-box;
+   
+    }
+
+    .row {
+        display: flex;
+        flex-direction: row;
+    }
+
+
+    /*                 border:1px solid black;
+        border-radius: 5px; */
+
+    
+    /* Create two equal columns that sits next to each other */
+    .column {
+        flex: 50%;
+        padding: 15px;
+    }
+
+    .instance_text {
+    width: 75%;
+    padding: 10px;
+    box-sizing: border-box;
+    }
+
+    .form-container {
+    height: 300px; 
+    overflow-y: scroll;
+    }
+
+
+    .annotation_schema {
+        width: 100%;
+        /* padding: 15px; */
+        box-sizing: content-box;width: 100%;
+        display: block; /* Change to block to make forms stack vertically */
+        margin-bottom: 0px;
+    }
+
+        .annotation_schema form fieldset {
+        display: flex;
+        flex-direction: row;
+        align-items: start;
+    }
+
+    .annotation_schema form fieldset legend {
+        margin-right: 10px; 
+    }
+
+    .annotation_schema form fieldset label {
+        margin-right: 10px; 
+    }
+
+    
+    .instance {
+        border:1px solid #070707;
+        background-color: cccccc;
+        border-radius: 5px;
+        padding: 15px;
+        display: block;
+        justify-content: center;
+        width: fit-content;
+        max-width: 120%;
+        text-align: left;
+        margin: 0 auto;
+        font-size: 15pt;
+    }
+
+    .instance p {
+        font-weight: bold;
+        display: block;
+    }
+
+    
+    /* .annotation_schema {
+        padding: 5px;                
+        display: flex;
+        justify-content: center;
+        width: 80%;
+        text-align: left;
+        margin: 0 auto;
+    } */
+   
+    
+    fieldset {
+        background-color: #fefffa;
+        border:1px solid #f6f4fc;
+        background-color: cccccc;
+        padding: 10px 15px 10px 15px;
+    }
+    
+    legend {
+        background-color: #4e99c2;
+        color: white;
+        padding: 0;
+        /* padding: 5px 5px; */
+        font-size: 10pt;
+        font-weight: normal;
+    }
+
+    input[type="text"] {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;  
+        box-sizing: border-box;
+        width: 100%;
+    }
+      
+    input {
+        margin: 5px;
+    }
+
+
+    .likert li {
+        float: inline-start;
+        list-style-type: none;
+    }
+
+
+    /* The sidepanel menu */
+    .sidepanel {
+        min-height: 250px; /* Specify a height */
+        width: 0; /* 0 width - change this with JavaScript */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Stay on top */
+        top: 95px;
+        left: 1px;
+        background-color: #77b1c1; /* Black*/
+        overflow-x: hidden; /* Disable horizontal scroll */
+        padding-top: 10px; /* Place content 60px from the top */
+        padding-bottom: 20px;
+        transition: 0.5s; /* 0.5 second transition effect to slide in the sidepanel */
+    }
+
+    /* The sidepanel links */
+    .sidepanel a {
+        padding: 8px 8px 8px 32px;
+        text-decoration: none;
+        font-size: 55px;
+        color: #ffffff; /* #818181; */
+        display: block;
+        transition: 0.3s;
+    }
+
+    /* When you mouse over the navigation links, change their color */
+    .sidepanel a:hover {
+        color: #f1f1f1;
+    }
+
+    /* When you mouse over the navigation links, change their color */
+    .sidepanel table {
+        color: #ffffff;
+        font-size: 20px;
+        /*padding: 8px 8px 18px 62px;*/
+        margin-left: 20px;
+        margin-top: 10px;
+        border-spacing: 10px;
+    }
+    
+    .sidepanel td, th  {
+        color: #ffffff;
+        padding: 5px;
+    }
+
+    .sidepanel tr:nth-child(even) {
+        background-color: #a4c6cb;
+    }
+                
+    
+    /* Position and style the close button (top right corner) */
+    .sidepanel .closebtn {
+        position: absolute;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+        margin-left: 50px;
+    }
+
+    /* Style the button that is used to open the sidepanel */
+    .openbtn {
+        cursor: pointer;
+        /*
+        font-size: 20px;                
+        background-color: #111;
+        color: white;
+        padding: 10px 15px;
+        border: none;*/
+    }
+
+    .openbtn:hover {
+        background-color: #444;
+    } 
+
+    /* The instructions */
+    .instructions {
+        /* width: 0; */ /* 0 width - change this with JavaScript */
+        transition: 0.5s; /* 0.5 second transition effect to slide in the sidepanel */
+        overflow-y: hidden; /* Disable horizontal scroll */
+        border:1px solid #070707;
+        background-color: cccccc;
+        border-radius: 5px;
+        padding: 15px;
+        display: block;
+        justify-content: center;
+        width: fit-content;
+        max-width: 80%;
+        text-align: left;
+        margin: 0 auto;
+        font-size: 14pt;               
+    }
+
+    
+    /* Position and style the close button (top right corner) */
+    .instructions .closebtn {
+        position: absolute;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+        margin-left: 50px;
+    }
+
+    /* Style the button that is used to open the sidepanel */
+    .instructions .openbtn {
+        cursor: pointer;
+        /*
+        font-size: 20px;                
+        background-color: #111;
+        color: white;
+        padding: 10px 15px;
+        border: none;*/
+    }
+
+    .span_container {
+      border-width:3px;
+      border-style:solid;
+      border: 2px solid rgb(0, 0, 0);
+      position: relative;
+      border-radius: 5px;
+      padding: 2px 5px;
+      background-color: rgb(132, 131, 133);
+    }
+    
+    .span_label {
+    position: absolute;
+    top: -12px;
+    left: 5px;
+    font-size: 7px;
+    padding: 1px 1px;
+    border-radius: 3px;
+    background-color: rgb(192, 229, 255);
+    border: 2px solid rgb(148, 210, 255);
+    text-align: center;
+    }            
+    
+</style>
+
+<div class="container">
     <div class="row">
         <div class="col-md-6">
             <div class="row">

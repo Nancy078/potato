@@ -268,8 +268,8 @@
     # if you want to use your own template,
     # please replace the string as a path to the template
     # "base_html_template": "../../potato/templates/Doctor-Patient-Conversation-Analysis-base_template.html",
-    "base_html_template": "../templates/Dialogue-Analysis-Dialogue-Analysis-base_template copy.html",
-    #  "base_html_template": "default",
+    # "base_html_template": "../templates/Dialogue-Analysis-Dialogue-Analysis-base_template copy.html",
+    "base_html_template": "default",
     "header_file": "default",
 
     # This is where the actual HTML files will be generated

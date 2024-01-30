@@ -253,7 +253,7 @@
 
     <div id="mySidepanel" class="sidepanel">
       <a href="javascript:void(0)" class="closebtn" target_id="mySidepanel" onclick="closeNav(this.getAttribute('target_id'))">&times;</a>
-      <table><tr><th>Key</th><th>Description</th></tr><tr><td style="text-align: center;">&#8594;</td><td>Move forward</td></tr></table>
+      <table><tr><th>Key</th><th>Description</th></tr><tr><td style="text-align: center;">&#8592;</td><td>Move backward</td></tr></table>
     </div>
 
     <div id="Statpanel" class="sidepanel">
@@ -800,17 +800,36 @@
         flex: 50%;
         padding: 0px;
     }
-
+/* 
     .instance_text {
     width: 100%;
     padding: 10px;
     box-sizing: content-box;
+    } */
+
+    .instance_text {
+        max-width: 400px;
+        margin-bottom: 10px;
+        position:sticky;
+        position: -webkit-sticky;
+        top: 10px;
+        z-index: 100;
     }
 
-    .form-container {
-    height: 300px; 
-    overflow-y: scroll;
+    .container {
+        position: relative;
     }
+
+    .sticky-instance {
+        margin: 0;
+        position: -webkit-sticky;
+        position: sticky;
+        top: 10px;
+        z-index: 100;
+    }
+
+
+
 
 
     .annotation_schema {
@@ -818,7 +837,16 @@
         /* padding: 15px; */
         box-sizing: content-box;width: 100%;
         display: block; /* Change to block to make forms stack vertically */
-        margin-bottom: 0px;
+        margin-bottom: 10px;
+        margin-right: 0%;
+        margin-left: 0%;
+        margin-top:10px;
+        margin-inline: 10px;
+        margin-block-start: 0%;
+        margin-inline-start: 0%;
+        border-radius: 10px; 
+        padding: 15px;
+        
     }
 
         .annotation_schema form fieldset {
@@ -828,18 +856,18 @@
     }
 
     .annotation_schema form fieldset legend {
-        margin-right: 10px; 
+        margin-right: 0%; 
     }
 
     .annotation_schema form fieldset label {
-        margin-right: 10px; 
+        margin-right: 0%; 
     }
 
     
     .instance {
-        border:1px solid #070707;
+        border: 1px solid #9cbee2;
         background-color: cccccc;
-        border-radius: 5px;
+        border-radius: 10px;
         padding: 15px;
         display: block;
         justify-content: center;
@@ -847,12 +875,16 @@
         max-width: 120%;
         text-align: left;
         margin: 0 auto;
-        font-size: 15pt;
+        font-size: 15.5pt;
+        position: sticky;
+        position: -webkit-sticky;
+        top: 0; 
     }
 
     .instance p {
         font-weight: bold;
         display: block;
+       
     }
 
     
@@ -867,18 +899,19 @@
    
     
     fieldset {
-        background-color: #fefffa;
-        border:1px solid #f6f4fc;
+        background-color: #ffffff;
+        border:1px solid #ffffff;
         background-color: cccccc;
-        padding: 10px 15px 10px 15px;
+        padding: 1px;
+        /* padding: 10px 15px 10px 15px; */
     }
     
     legend {
-        background-color: #4c8aab;
-        color: white;
-        padding: 0;
+        background-color: #2c69a5;
+        color: rgb(255, 255, 255);
+        padding: 5px;
         /* padding: 5px 5px; */
-        font-size: 10pt;
+        font-size: 11pt;
         font-weight: normal;
     }
 
@@ -887,6 +920,10 @@
         -moz-box-sizing: border-box;  
         box-sizing: border-box;
         width: 100%;
+    }
+
+    .annotation_schema form fieldset label input[type="radio"][value="not_applicable"] {
+        margin-right: 10px; /* Adjust this margin as needed */
     }
       
     input {
@@ -948,7 +985,8 @@
     .sidepanel tr:nth-child(even) {
         background-color: #a4c6cb;
     }
-                
+    
+
     
     /* Position and style the close button (top right corner) */
     .sidepanel .closebtn {
@@ -1037,6 +1075,7 @@
     
 </style>
 
+
 <div class="container">
     <div class="row">
         <div class="col-md-6">
@@ -1044,7 +1083,9 @@
                 <div class="col-md-12">
                     <div name="context_text" class="instance">
                         <div name="instance_text" style="max-width: 400px;">
-                            {{instance | safe}}
+                            
+                                {{instance | safe}}
+                        
                         </div>
                     </div>
                 </div>
@@ -1055,11 +1096,10 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="annotation_schema" style="max-width: 400px;">
-                        <Strong>Instructions:</Strong> This project aims to understand patient perceptions of doctor-patient interactions. In this task, you will be presented with small parts of a conversation between a doctor and a patient. The patient is diagnosed with prostate cancer and the doctor talks to him about his treatments. Some topics the doctor may discuss are: the patient's health condition, a new trial or treatment, his eligibility to enroll in the trial, and the doctor’s recommendations. There might be family member and healthcare workers present as well. <br><br>Your will rate these parts based on qualities of the patient (such as competence) and the doctor (such as empathy), You will do this in 2 ways: from the point of view (POV) of the patient, and from the point of view (POV) of an observer. Some items might not apply to this part of the conversation, so you can put 'not applicable'. Please rate these based on your own understanding of the qualities (agency, competence, partnership-building etc.).  At the end of the conversation, we will ask you to guess what the race of the patient is.<br><br><br>
-<form action="/action_page.php">  <fieldset>  <legend>What race do you think the patient is? </legend>      <input class="What race do you think the patient is? " type="radio" id="What race do you think the patient is? :::Black" name="What race do you think the patient is? :::Black" value="What race do you think the patient is? :::Black" onclick="onlyOne(this)" validation="required">  <label for="What race do you think the patient is? :::Black" >Black</label><br/>      <input class="What race do you think the patient is? " type="radio" id="What race do you think the patient is? :::White" name="What race do you think the patient is? :::White" value="What race do you think the patient is? :::White" onclick="onlyOne(this)" validation="required">  <label for="What race do you think the patient is? :::White" >White</label><br/>      <input class="What race do you think the patient is? " type="radio" id="What race do you think the patient is? :::Unsure" name="What race do you think the patient is? :::Unsure" value="What race do you think the patient is? :::Unsure" onclick="onlyOne(this)" validation="required">  <label for="What race do you think the patient is? :::Unsure" >Unsure</label><br/>  </fieldset>
+                       
+                        <form action="/action_page.php">  <fieldset>  <legend>What race do you think the patient is? </legend>      <input class="What race do you think the patient is? " type="radio" id="What race do you think the patient is? :::Black" name="What race do you think the patient is? :::Black" value="What race do you think the patient is? :::Black" onclick="onlyOne(this)" validation="required">  <label for="What race do you think the patient is? :::Black" >Black</label><br/>      <input class="What race do you think the patient is? " type="radio" id="What race do you think the patient is? :::White" name="What race do you think the patient is? :::White" value="What race do you think the patient is? :::White" onclick="onlyOne(this)" validation="required">  <label for="What race do you think the patient is? :::White" >White</label><br/>      <input class="What race do you think the patient is? " type="radio" id="What race do you think the patient is? :::Unsure" name="What race do you think the patient is? :::Unsure" value="What race do you think the patient is? :::Unsure" onclick="onlyOne(this)" validation="required">  <label for="What race do you think the patient is? :::Unsure" >Unsure</label><br/>  </fieldset>
 </form>
 <br>
-<Strong>Thanks for your time, please click the following link to complete the study</Strong> <a href="https://app.prolific.co/submissions/complete?cc=YOUR-PROLIFIC-CODE">Click to finish the study</a><br>
 
                     </div>
                 </div>
@@ -1084,11 +1124,9 @@
             </div>
           </div>
             <div class="annotation_schema" style="display: grid;grid-template-columns: repeat(1, 1fr);gap: 20px;grid-auto-rows: auto; max-width:400px;">
-                <Strong>Instructions:</Strong> This project aims to understand patient perceptions of doctor-patient interactions. In this task, you will be presented with small parts of a conversation between a doctor and a patient. The patient is diagnosed with prostate cancer and the doctor talks to him about his treatments. Some topics the doctor may discuss are: the patient's health condition, a new trial or treatment, his eligibility to enroll in the trial, and the doctor’s recommendations. There might be family member and healthcare workers present as well. <br><br>Your will rate these parts based on qualities of the patient (such as competence) and the doctor (such as empathy), You will do this in 2 ways: from the point of view (POV) of the patient, and from the point of view (POV) of an observer. Some items might not apply to this part of the conversation, so you can put 'not applicable'. Please rate these based on your own understanding of the qualities (agency, competence, partnership-building etc.).  At the end of the conversation, we will ask you to guess what the race of the patient is.<br><br><br>
-<form action="/action_page.php">  <fieldset>  <legend>What race do you think the patient is? </legend>      <input class="What race do you think the patient is? " type="radio" id="What race do you think the patient is? :::Black" name="What race do you think the patient is? :::Black" value="What race do you think the patient is? :::Black" onclick="onlyOne(this)" validation="required">  <label for="What race do you think the patient is? :::Black" >Black</label><br/>      <input class="What race do you think the patient is? " type="radio" id="What race do you think the patient is? :::White" name="What race do you think the patient is? :::White" value="What race do you think the patient is? :::White" onclick="onlyOne(this)" validation="required">  <label for="What race do you think the patient is? :::White" >White</label><br/>      <input class="What race do you think the patient is? " type="radio" id="What race do you think the patient is? :::Unsure" name="What race do you think the patient is? :::Unsure" value="What race do you think the patient is? :::Unsure" onclick="onlyOne(this)" validation="required">  <label for="What race do you think the patient is? :::Unsure" >Unsure</label><br/>  </fieldset>
+                <form action="/action_page.php">  <fieldset>  <legend>What race do you think the patient is? </legend>      <input class="What race do you think the patient is? " type="radio" id="What race do you think the patient is? :::Black" name="What race do you think the patient is? :::Black" value="What race do you think the patient is? :::Black" onclick="onlyOne(this)" validation="required">  <label for="What race do you think the patient is? :::Black" >Black</label><br/>      <input class="What race do you think the patient is? " type="radio" id="What race do you think the patient is? :::White" name="What race do you think the patient is? :::White" value="What race do you think the patient is? :::White" onclick="onlyOne(this)" validation="required">  <label for="What race do you think the patient is? :::White" >White</label><br/>      <input class="What race do you think the patient is? " type="radio" id="What race do you think the patient is? :::Unsure" name="What race do you think the patient is? :::Unsure" value="What race do you think the patient is? :::Unsure" onclick="onlyOne(this)" validation="required">  <label for="What race do you think the patient is? :::Unsure" >Unsure</label><br/>  </fieldset>
 </form>
 <br>
-<Strong>Thanks for your time, please click the following link to complete the study</Strong> <a href="https://app.prolific.co/submissions/complete?cc=YOUR-PROLIFIC-CODE">Click to finish the study</a><br>
 
             </div>
         </div>
@@ -1107,8 +1145,8 @@
       <div>
         <p>
           <div class="text-center">
-            <a class="btn btn-secondary" href="#" role="button" onclick="click_to_prev()" hidden>Move backward</a>
-            <a class="btn btn-secondary" href="#" role="button" onclick="click_to_next()">Move forward</a>
+            <a class="btn btn-secondary" href="#" role="button" onclick="click_to_prev()">Move backward</a>
+            <a class="btn btn-secondary" href="#" role="button" onclick="click_to_next()" hidden>Move forward</a>
           </div>
         </p>        
       </div>

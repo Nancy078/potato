@@ -253,7 +253,7 @@
 
     <div id="mySidepanel" class="sidepanel">
       <a href="javascript:void(0)" class="closebtn" target_id="mySidepanel" onclick="closeNav(this.getAttribute('target_id'))">&times;</a>
-      <table><tr><th>Key</th><th>Description</th></tr><tr><td style="text-align: center;">&#8594;</td><td>Move forward</td></tr></table>
+      <table><tr><th>Key</th><th>Description</th></tr><tr><td style="text-align: center;">&#8592;</td><td>Move backward</td></tr></table>
     </div>
 
     <div id="Statpanel" class="sidepanel">
@@ -1055,11 +1055,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="annotation_schema" style="max-width: 400px;">
-                        <Strong>Instructions:</Strong> This project aims to understand patient perceptions of doctor-patient interactions. In this task, you will be presented with small parts of a conversation between a doctor and a patient. The patient is diagnosed with prostate cancer and the doctor talks to him about his treatments. Some topics the doctor may discuss are: the patient's health condition, a new trial or treatment, his eligibility to enroll in the trial, and the doctor’s recommendations. There might be family member and healthcare workers present as well. <br><br>Your will rate these parts based on qualities of the patient (such as competence) and the doctor (such as empathy), You will do this in 2 ways: from the point of view (POV) of the patient, and from the point of view (POV) of an observer. Some items might not apply to this part of the conversation, so you can put 'not applicable'. Please rate these based on your own understanding of the qualities (agency, competence, partnership-building etc.).  At the end of the conversation, we will ask you to guess what the race of the patient is.<br><br><br>
-<form action="/action_page.php">  <fieldset>  <legend>What race do you think the patient is? </legend>      <input class="What race do you think the patient is? " type="radio" id="What race do you think the patient is? :::Black" name="What race do you think the patient is? :::Black" value="What race do you think the patient is? :::Black" onclick="onlyOne(this)" validation="required">  <label for="What race do you think the patient is? :::Black" >Black</label><br/>      <input class="What race do you think the patient is? " type="radio" id="What race do you think the patient is? :::White" name="What race do you think the patient is? :::White" value="What race do you think the patient is? :::White" onclick="onlyOne(this)" validation="required">  <label for="What race do you think the patient is? :::White" >White</label><br/>      <input class="What race do you think the patient is? " type="radio" id="What race do you think the patient is? :::Unsure" name="What race do you think the patient is? :::Unsure" value="What race do you think the patient is? :::Unsure" onclick="onlyOne(this)" validation="required">  <label for="What race do you think the patient is? :::Unsure" >Unsure</label><br/>  </fieldset>
-</form>
-<br>
-<Strong>Thanks for your time, please click the following link to complete the study</Strong> <a href="https://app.prolific.co/submissions/complete?cc=YOUR-PROLIFIC-CODE">Click to finish the study</a><br>
+                        <Strong>Thanks for your time, please click the following link to complete the study</Strong> <a href="https://app.prolific.co/submissions/complete?cc=YOUR-PROLIFIC-CODE">Click to finish the study</a><br>
 
                     </div>
                 </div>
@@ -1084,11 +1080,7 @@
             </div>
           </div>
             <div class="annotation_schema" style="display: grid;grid-template-columns: repeat(1, 1fr);gap: 20px;grid-auto-rows: auto; max-width:400px;">
-                <Strong>Instructions:</Strong> This project aims to understand patient perceptions of doctor-patient interactions. In this task, you will be presented with small parts of a conversation between a doctor and a patient. The patient is diagnosed with prostate cancer and the doctor talks to him about his treatments. Some topics the doctor may discuss are: the patient's health condition, a new trial or treatment, his eligibility to enroll in the trial, and the doctor’s recommendations. There might be family member and healthcare workers present as well. <br><br>Your will rate these parts based on qualities of the patient (such as competence) and the doctor (such as empathy), You will do this in 2 ways: from the point of view (POV) of the patient, and from the point of view (POV) of an observer. Some items might not apply to this part of the conversation, so you can put 'not applicable'. Please rate these based on your own understanding of the qualities (agency, competence, partnership-building etc.).  At the end of the conversation, we will ask you to guess what the race of the patient is.<br><br><br>
-<form action="/action_page.php">  <fieldset>  <legend>What race do you think the patient is? </legend>      <input class="What race do you think the patient is? " type="radio" id="What race do you think the patient is? :::Black" name="What race do you think the patient is? :::Black" value="What race do you think the patient is? :::Black" onclick="onlyOne(this)" validation="required">  <label for="What race do you think the patient is? :::Black" >Black</label><br/>      <input class="What race do you think the patient is? " type="radio" id="What race do you think the patient is? :::White" name="What race do you think the patient is? :::White" value="What race do you think the patient is? :::White" onclick="onlyOne(this)" validation="required">  <label for="What race do you think the patient is? :::White" >White</label><br/>      <input class="What race do you think the patient is? " type="radio" id="What race do you think the patient is? :::Unsure" name="What race do you think the patient is? :::Unsure" value="What race do you think the patient is? :::Unsure" onclick="onlyOne(this)" validation="required">  <label for="What race do you think the patient is? :::Unsure" >Unsure</label><br/>  </fieldset>
-</form>
-<br>
-<Strong>Thanks for your time, please click the following link to complete the study</Strong> <a href="https://app.prolific.co/submissions/complete?cc=YOUR-PROLIFIC-CODE">Click to finish the study</a><br>
+                <Strong>Thanks for your time, please click the following link to complete the study</Strong> <a href="https://app.prolific.co/submissions/complete?cc=YOUR-PROLIFIC-CODE">Click to finish the study</a><br>
 
             </div>
         </div>
@@ -1107,8 +1099,8 @@
       <div>
         <p>
           <div class="text-center">
-            <a class="btn btn-secondary" href="#" role="button" onclick="click_to_prev()" hidden>Move backward</a>
-            <a class="btn btn-secondary" href="#" role="button" onclick="click_to_next()">Move forward</a>
+            <a class="btn btn-secondary" href="#" role="button" onclick="click_to_prev()">Move backward</a>
+            <a class="btn btn-secondary" href="#" role="button" onclick="click_to_next()" hidden>Move forward</a>
           </div>
         </p>        
       </div>

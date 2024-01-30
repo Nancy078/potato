@@ -19,17 +19,36 @@
         flex: 50%;
         padding: 0px;
     }
-
+/* 
     .instance_text {
     width: 100%;
     padding: 10px;
     box-sizing: content-box;
+    } */
+
+    .instance_text {
+        max-width: 400px;
+        margin-bottom: 10px;
+        position:sticky;
+        position: -webkit-sticky;
+        top: 10px;
+        z-index: 100;
     }
 
-    .form-container {
-    height: 300px; 
-    overflow-y: scroll;
+    .container {
+        position: relative;
     }
+
+    .sticky-instance {
+        margin: 0;
+        position: -webkit-sticky;
+        position: sticky;
+        top: 10px;
+        z-index: 100;
+    }
+
+
+
 
 
     .annotation_schema {
@@ -37,7 +56,16 @@
         /* padding: 15px; */
         box-sizing: content-box;width: 100%;
         display: block; /* Change to block to make forms stack vertically */
-        margin-bottom: 0px;
+        margin-bottom: 10px;
+        margin-right: 0%;
+        margin-left: 0%;
+        margin-top:10px;
+        margin-inline: 10px;
+        margin-block-start: 0%;
+        margin-inline-start: 0%;
+        border-radius: 10px; 
+        padding: 15px;
+        
     }
 
         .annotation_schema form fieldset {
@@ -47,18 +75,18 @@
     }
 
     .annotation_schema form fieldset legend {
-        margin-right: 10px; 
+        margin-right: 0%; 
     }
 
     .annotation_schema form fieldset label {
-        margin-right: 10px; 
+        margin-right: 0%; 
     }
 
     
     .instance {
-        border:1px solid #070707;
+        border: 1px solid #9cbee2;
         background-color: cccccc;
-        border-radius: 5px;
+        border-radius: 10px;
         padding: 15px;
         display: block;
         justify-content: center;
@@ -66,12 +94,16 @@
         max-width: 120%;
         text-align: left;
         margin: 0 auto;
-        font-size: 15pt;
+        font-size: 15.5pt;
+        position: sticky;
+        position: -webkit-sticky;
+        top: 0; 
     }
 
     .instance p {
         font-weight: bold;
         display: block;
+       
     }
 
     
@@ -86,18 +118,19 @@
    
     
     fieldset {
-        background-color: #fefffa;
-        border:1px solid #f6f4fc;
+        background-color: #ffffff;
+        border:1px solid #ffffff;
         background-color: cccccc;
-        padding: 10px 15px 10px 15px;
+        padding: 1px;
+        /* padding: 10px 15px 10px 15px; */
     }
     
     legend {
-        background-color: #4c8aab;
-        color: white;
-        padding: 0;
+        background-color: #2c69a5;
+        color: rgb(255, 255, 255);
+        padding: 5px;
         /* padding: 5px 5px; */
-        font-size: 10pt;
+        font-size: 11pt;
         font-weight: normal;
     }
 
@@ -106,6 +139,10 @@
         -moz-box-sizing: border-box;  
         box-sizing: border-box;
         width: 100%;
+    }
+
+    .annotation_schema form fieldset label input[type="radio"][value="not_applicable"] {
+        margin-right: 10px; /* Adjust this margin as needed */
     }
       
     input {
@@ -167,7 +204,8 @@
     .sidepanel tr:nth-child(even) {
         background-color: #a4c6cb;
     }
-                
+    
+
     
     /* Position and style the close button (top right corner) */
     .sidepanel .closebtn {
@@ -256,6 +294,7 @@
     
 </style>
 
+
 <div class="container">
     <div class="row">
         <div class="col-md-6">
@@ -263,7 +302,9 @@
                 <div class="col-md-12">
                     <div name="context_text" class="instance">
                         <div name="instance_text" style="max-width: 400px;">
-                            {{instance | safe}}
+                            
+                                {{instance | safe}}
+                        
                         </div>
                     </div>
                 </div>
@@ -274,6 +315,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="annotation_schema" style="max-width: 400px;">
+                       
                         {{annotation_schematic}}
                     </div>
                 </div>

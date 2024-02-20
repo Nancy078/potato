@@ -745,9 +745,9 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
-          <div class="navbar-nav" hidden>
+          <div class="navbar-nav">
             <a href="#" class="nav-item nav-link active">Home</a>
-            
+            <a href="https://docs.google.com/document/d/16ZV4P9lwR8lWbfXLOwvcw7xV4QVGtHXygw1lzo-A3jY/edit?usp=sharing" class="nav-item nav-link">Annotation Codebook</a>
             <a role="button" href="#" class="nav-item nav-link openbtn" target_id="Statpanel" width = "475px" onclick="openNav(this.getAttribute('target_id'),this.getAttribute('width'))">Statistics</a>
             <a role="button" href="#" class="nav-item nav-link openbtn" target_id="mySidepanel" onclick="openNav(this.getAttribute('target_id'))">Help</a>
           </div>
@@ -828,10 +828,9 @@
 
     .instance_text {
         position: fixed;
-        top: 0;
-        left: 0;
         padding: 5px;
-        width: 100%;
+        /* min-width: 5000px; */
+        margin-right: 30px;
     }
 
     /* .instance_text {
@@ -844,7 +843,7 @@
     } */
 
     .container {
-        width: 2000px;
+        /* min-width: 2000px; */
         border: 1px solid #ffffff;
         padding: 5px;
     }
@@ -858,26 +857,28 @@
     } */
 
     .annotation_schema {
-        width: 100%;
+        /* width: 100%; */
         /* padding: 15px; */
         box-sizing: content-box;width: 100%;
-        display: block; /* Change to block to make forms stack vertically */
-        margin-bottom: 10px;
+        display: inline-block; /* Change to block to make forms stack vertically */
+        /* margin-bottom: 10px;
         margin-right: 0%;
         margin-left: 0%;
         margin-top:10px;
         margin-inline: 10px;
         margin-block-start: 0%;
         margin-inline-start: 0%;
-        border-radius: 10px; 
+        border-radius: 10px;  */
         padding: 15px;
+        border-radius: 10px;
         
     }
 
     .annotation_schema form fieldset {
-        display: flex;
+        display: block;
         flex-direction: row;
         align-items: start;
+        border-radius: 10px;
     }
 
     .annotation_schema form fieldset legend {
@@ -886,28 +887,34 @@
         margin-left: 0px;
         margin-inline-start: 0px;
         border-radius: 10px;
+        padding: 10px;
     }
 
     .annotation_schema form fieldset label {
         min-width: 80px;
         margin-right: 0px; 
         margin-left: 0%;
+        border-radius: 10px;
+        padding: 0px;
     
     }
 
     
     .instance {
+       
         border: 1px solid #9cbee2;
         background-color: cccccc;
+        min-width:300px;
+        max-width: 600px;
         border-radius: 10px;
-        padding: 15px;
+        padding: 20px;
         display: block;
         justify-content: center;
-        width: fit-content;
-        width: 500px;
+        /* width: fit-content; */
+        /* min-width: 400px; */
         text-align: left;
         margin: 0 auto;
-        font-size: 14pt;
+        font-size: 12pt;
         /* position: sticky;
         position: -webkit-sticky; */
         top: 0; 
@@ -934,17 +941,18 @@
     fieldset {
         background-color: #ffffff;
         border:1px solid #ffffff;
-        background-color: cccccc;
-        padding: 3px;
+      
+        padding: 0px;
         /* padding: 10px 15px 10px 15px; */
     }
     
     legend {
-        background-color: #2c69a5;
-        color: rgb(255, 255, 255);
-        padding: 7px;
+        /* background-color: #e3f0fc; */
+        background-color: #edf6ff;
+        color: rgb(0, 0, 0);
+        padding: 0px;
         /* padding: 5px 5px; */
-        font-size: 11.5pt;
+        font-size: 12pt;
         font-weight: normal;
     }
 
@@ -955,9 +963,6 @@
         width: 100%;
     }
 
-    .annotation_schema form fieldset label input[type="radio"][value="not_applicable"] {
-        margin-right: 10px; /* Adjust this margin as needed */
-    }
       
     input {
         margin: 5px;
@@ -1060,7 +1065,7 @@
         max-width: 80%;
         text-align: left;
         margin: 0 auto;
-        font-size: 14pt;               
+        font-size: 12pt;               
     }
 
     
@@ -1108,6 +1113,45 @@
     
 </style>
 
+<div style="align:center; display:block; justify-content:center;" align="center">
+    <a href="javascript:void(0)" target_id="instructions" onclick="closeNav2 (this.getAttribute('target_id'))">Show/Hide instructions</a>
+  </div>
+  <div class="instructions" id="instructions">
+
+    <p><b>Instructions</b>: This project aims to understand patient perceptions of doctor-patient interactions. In this task, you will be presented with small parts of different conversations between doctors and patients. In each conversation, the patient is diagnosed with prostate cancer and the doctor talks to him about his treatments. Some topics the doctor may discuss are: the patient's health condition, a new trial or treatment, his eligibility to enroll in the trial, and the doctor’s recommendations. There might be family members and healthcare workers present as well.
+
+        </p>
+    <p>  You will rate these parts based on the qualities of the patient (such as competence) and the doctor (such as empathy), You will do this from the point of view of the patient. Some items might not apply to this part of the conversation, so you can put 'not applicable'. Please rate these based on your own understanding of the qualities (agency, competence, partnership-building etc.). </p>
+    </p>
+    <p> 
+        To check out the definition of these qualities, you can click on <b>Annotation Codebook</b> on the top navigation bar. 
+    </p>
+
+    <p>For your convenience, some qualities are defined briefly below:
+        <ul>
+          <li> <b>Competence</b>: The ability to reason, understand relevant information, and assess the situation and its consequences
+          </li>
+          
+          <li> <b>Agency</b>: The ability to contribute and decide on treatment, being an active participant.
+
+          </li>
+          
+          <li> <b>Support</b>: Shows genuine care, putting the patient at ease, reassuring them, and demonstrating concern for their well-being
+
+          </li>
+
+          <li> <b>Partnership</b>:  Encourages open communication, treating the patient as an equal, soliciting their concerns, and thoughts on their treatment and health
+
+
+          </li>
+
+
+        </ul>
+      </p>
+
+  </div>
+
+
 
 <div class="container">
     <div class="row">
@@ -1115,7 +1159,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div name="context_text" class="instance">
-                        <div name="instance_text" style="max-width: 400px;">
+                        <div name="instance_text" style="min-width: 500px;">
                             
                                 {{instance | safe}}
                         
@@ -1128,9 +1172,34 @@
         <div class="col-md-6">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="annotation_schema" style="max-width: 400px;">
+                    <div class="annotation_schema" style="min-width: 600px;font-size:15px ">
                        
-                        <form action="/action_page.php">  <fieldset>  <legend>What race do you think the patient is? </legend>      <input class="What race do you think the patient is? " type="radio" id="What race do you think the patient is? :::Black" name="What race do you think the patient is? :::Black" value="What race do you think the patient is? :::Black" onclick="onlyOne(this)" validation="required">  <label for="What race do you think the patient is? :::Black" >Black</label><br/>      <input class="What race do you think the patient is? " type="radio" id="What race do you think the patient is? :::White" name="What race do you think the patient is? :::White" value="What race do you think the patient is? :::White" onclick="onlyOne(this)" validation="required">  <label for="What race do you think the patient is? :::White" >White</label><br/>      <input class="What race do you think the patient is? " type="radio" id="What race do you think the patient is? :::Unsure" name="What race do you think the patient is? :::Unsure" value="What race do you think the patient is? :::Unsure" onclick="onlyOne(this)" validation="required">  <label for="What race do you think the patient is? :::Unsure" >Unsure</label><br/>  </fieldset>
+                        <form action="/action_page.php">  <fieldset>  <legend>How often do you interact with doctors? </legend>      <input class="How often do you interact with doctors? " type="radio" id="How often do you interact with doctors? :::never" name="How often do you interact with doctors? :::never" value="How often do you interact with doctors? :::never" onclick="onlyOne(this)" validation="required">  <label for="How often do you interact with doctors? :::never" >never</label><br/>      <input class="How often do you interact with doctors? " type="radio" id="How often do you interact with doctors? :::rarely" name="How often do you interact with doctors? :::rarely" value="How often do you interact with doctors? :::rarely" onclick="onlyOne(this)" validation="required">  <label for="How often do you interact with doctors? :::rarely" >rarely</label><br/>      <input class="How often do you interact with doctors? " type="radio" id="How often do you interact with doctors? :::sometimes" name="How often do you interact with doctors? :::sometimes" value="How often do you interact with doctors? :::sometimes" onclick="onlyOne(this)" validation="required">  <label for="How often do you interact with doctors? :::sometimes" >sometimes</label><br/>      <input class="How often do you interact with doctors? " type="radio" id="How often do you interact with doctors? :::very often" name="How often do you interact with doctors? :::very often" value="How often do you interact with doctors? :::very often" onclick="onlyOne(this)" validation="required">  <label for="How often do you interact with doctors? :::very often" >very often</label><br/>      <input class="How often do you interact with doctors? " type="radio" id="How often do you interact with doctors? :::always" name="How often do you interact with doctors? :::always" value="How often do you interact with doctors? :::always" onclick="onlyOne(this)" validation="required">  <label for="How often do you interact with doctors? :::always" >always</label><br/>  </fieldset>
+</form>
+<br>
+<form action="/action_page.php">  <fieldset>  <legend>How would you rate your level of trust toward doctors?</legend>      <input class="How would you rate your level of trust toward doctors?" type="radio" id="How would you rate your level of trust toward doctors?:::not at all" name="How would you rate your level of trust toward doctors?:::not at all" value="How would you rate your level of trust toward doctors?:::not at all" onclick="onlyOne(this)" validation="required">  <label for="How would you rate your level of trust toward doctors?:::not at all" >not at all</label><br/>      <input class="How would you rate your level of trust toward doctors?" type="radio" id="How would you rate your level of trust toward doctors?:::slightly" name="How would you rate your level of trust toward doctors?:::slightly" value="How would you rate your level of trust toward doctors?:::slightly" onclick="onlyOne(this)" validation="required">  <label for="How would you rate your level of trust toward doctors?:::slightly" >slightly</label><br/>      <input class="How would you rate your level of trust toward doctors?" type="radio" id="How would you rate your level of trust toward doctors?:::moderately" name="How would you rate your level of trust toward doctors?:::moderately" value="How would you rate your level of trust toward doctors?:::moderately" onclick="onlyOne(this)" validation="required">  <label for="How would you rate your level of trust toward doctors?:::moderately" >moderately</label><br/>      <input class="How would you rate your level of trust toward doctors?" type="radio" id="How would you rate your level of trust toward doctors?:::very" name="How would you rate your level of trust toward doctors?:::very" value="How would you rate your level of trust toward doctors?:::very" onclick="onlyOne(this)" validation="required">  <label for="How would you rate your level of trust toward doctors?:::very" >very</label><br/>      <input class="How would you rate your level of trust toward doctors?" type="radio" id="How would you rate your level of trust toward doctors?:::extremely" name="How would you rate your level of trust toward doctors?:::extremely" value="How would you rate your level of trust toward doctors?:::extremely" onclick="onlyOne(this)" validation="required">  <label for="How would you rate your level of trust toward doctors?:::extremely" >extremely</label><br/>  </fieldset>
+</form>
+<br>
+<form action="/action_page.php">  <fieldset>  <legend>How would you rate your level of trust toward healthcare professionals in general?</legend>      <input class="How would you rate your level of trust toward healthcare professionals in general?" type="radio" id="How would you rate your level of trust toward healthcare professionals in general?:::not at all" name="How would you rate your level of trust toward healthcare professionals in general?:::not at all" value="How would you rate your level of trust toward healthcare professionals in general?:::not at all" onclick="onlyOne(this)" validation="required">  <label for="How would you rate your level of trust toward healthcare professionals in general?:::not at all" >not at all</label><br/>      <input class="How would you rate your level of trust toward healthcare professionals in general?" type="radio" id="How would you rate your level of trust toward healthcare professionals in general?:::slightly" name="How would you rate your level of trust toward healthcare professionals in general?:::slightly" value="How would you rate your level of trust toward healthcare professionals in general?:::slightly" onclick="onlyOne(this)" validation="required">  <label for="How would you rate your level of trust toward healthcare professionals in general?:::slightly" >slightly</label><br/>      <input class="How would you rate your level of trust toward healthcare professionals in general?" type="radio" id="How would you rate your level of trust toward healthcare professionals in general?:::moderately" name="How would you rate your level of trust toward healthcare professionals in general?:::moderately" value="How would you rate your level of trust toward healthcare professionals in general?:::moderately" onclick="onlyOne(this)" validation="required">  <label for="How would you rate your level of trust toward healthcare professionals in general?:::moderately" >moderately</label><br/>      <input class="How would you rate your level of trust toward healthcare professionals in general?" type="radio" id="How would you rate your level of trust toward healthcare professionals in general?:::very" name="How would you rate your level of trust toward healthcare professionals in general?:::very" value="How would you rate your level of trust toward healthcare professionals in general?:::very" onclick="onlyOne(this)" validation="required">  <label for="How would you rate your level of trust toward healthcare professionals in general?:::very" >very</label><br/>      <input class="How would you rate your level of trust toward healthcare professionals in general?" type="radio" id="How would you rate your level of trust toward healthcare professionals in general?:::extremely" name="How would you rate your level of trust toward healthcare professionals in general?:::extremely" value="How would you rate your level of trust toward healthcare professionals in general?:::extremely" onclick="onlyOne(this)" validation="required">  <label for="How would you rate your level of trust toward healthcare professionals in general?:::extremely" >extremely</label><br/>  </fieldset>
+</form>
+<br>
+<form action="/action_page.php">  <fieldset>  <legend>What is your gender?</legend>      <input class="What is your gender?" type="radio" id="What is your gender?:::Woman" name="What is your gender?:::Woman" value="What is your gender?:::Woman" onclick="onlyOne(this)" validation="required">  <label for="What is your gender?:::Woman" >Woman</label><br/>      <input class="What is your gender?" type="radio" id="What is your gender?:::Man" name="What is your gender?:::Man" value="What is your gender?:::Man" onclick="onlyOne(this)" validation="required">  <label for="What is your gender?:::Man" >Man</label><br/>      <input class="What is your gender?" type="radio" id="What is your gender?:::Non-binary" name="What is your gender?:::Non-binary" value="What is your gender?:::Non-binary" onclick="onlyOne(this)" validation="required">  <label for="What is your gender?:::Non-binary" >Non-binary</label><br/>      <input class="What is your gender?" type="radio" id="What is your gender?:::Prefer not to disclose" name="What is your gender?:::Prefer not to disclose" value="What is your gender?:::Prefer not to disclose" onclick="onlyOne(this)" validation="required">  <label for="What is your gender?:::Prefer not to disclose" >Prefer not to disclose</label><br/>      <input class="What is your gender?" type="radio" id="What is your gender?:::Prefer to self-describe (please specify)" name="What is your gender?:::Prefer to self-describe (please specify)" value="What is your gender?:::Prefer to self-describe (please specify)" onclick="onlyOne(this)" validation="required">  <label for="What is your gender?:::Prefer to self-describe (please specify)" >Prefer to self-describe (please specify)</label><br/> <input class="What is your gender?" type="text" id="What is your gender?:::free_response" name="What is your gender?:::free_response" >  <label for="What is your gender?:::free_response" Entire a label not listed here></label><br/>  </fieldset>
+</form>
+<br>
+<form action="/action_page.php">  <fieldset>  <legend>What is your current age?</legend>  <input class="What is your current age?" style="" type="number" id="What is your current age?:::text_box" name="What is your current age?:::text_box" validation="required">  <label for="What is your current age?:::text_box" ></label><br/>  </fieldset>
+</form>
+<br>
+<form action="/action_page.php">  <fieldset>  <legend>What is your occupation?</legend>      <input class="What is your occupation?" type="radio" id="What is your occupation?:::Employed" name="What is your occupation?:::Employed" value="What is your occupation?:::Employed" onclick="onlyOne(this)" validation="required">  <label for="What is your occupation?:::Employed" >Employed</label><br/>      <input class="What is your occupation?" type="radio" id="What is your occupation?:::Unemployed" name="What is your occupation?:::Unemployed" value="What is your occupation?:::Unemployed" onclick="onlyOne(this)" validation="required">  <label for="What is your occupation?:::Unemployed" >Unemployed</label><br/>      <input class="What is your occupation?" type="radio" id="What is your occupation?:::Student" name="What is your occupation?:::Student" value="What is your occupation?:::Student" onclick="onlyOne(this)" validation="required">  <label for="What is your occupation?:::Student" >Student</label><br/>      <input class="What is your occupation?" type="radio" id="What is your occupation?:::Retired" name="What is your occupation?:::Retired" value="What is your occupation?:::Retired" onclick="onlyOne(this)" validation="required">  <label for="What is your occupation?:::Retired" >Retired</label><br/>      <input class="What is your occupation?" type="radio" id="What is your occupation?:::Homemaker" name="What is your occupation?:::Homemaker" value="What is your occupation?:::Homemaker" onclick="onlyOne(this)" validation="required">  <label for="What is your occupation?:::Homemaker" >Homemaker</label><br/>      <input class="What is your occupation?" type="radio" id="What is your occupation?:::Self-employed" name="What is your occupation?:::Self-employed" value="What is your occupation?:::Self-employed" onclick="onlyOne(this)" validation="required">  <label for="What is your occupation?:::Self-employed" >Self-employed</label><br/>      <input class="What is your occupation?" type="radio" id="What is your occupation?:::Other" name="What is your occupation?:::Other" value="What is your occupation?:::Other" onclick="onlyOne(this)" validation="required">  <label for="What is your occupation?:::Other" >Other</label><br/>  </fieldset>
+</form>
+<br>
+<form action="/action_page.php">  <fieldset>  <legend>What is your education level?</legend>      <input class="What is your education level?" type="radio" id="What is your education level?:::Less than a high school diploma" name="What is your education level?:::Less than a high school diploma" value="What is your education level?:::Less than a high school diploma" onclick="onlyOne(this)" validation="required">  <label for="What is your education level?:::Less than a high school diploma" >Less than a high school diploma</label><br/>      <input class="What is your education level?" type="radio" id="What is your education level?:::High school diploma or equivalent" name="What is your education level?:::High school diploma or equivalent" value="What is your education level?:::High school diploma or equivalent" onclick="onlyOne(this)" validation="required">  <label for="What is your education level?:::High school diploma or equivalent" >High school diploma or equivalent</label><br/>      <input class="What is your education level?" type="radio" id="What is your education level?:::College degree" name="What is your education level?:::College degree" value="What is your education level?:::College degree" onclick="onlyOne(this)" validation="required">  <label for="What is your education level?:::College degree" >College degree</label><br/>      <input class="What is your education level?" type="radio" id="What is your education level?:::Graduate degree" name="What is your education level?:::Graduate degree" value="What is your education level?:::Graduate degree" onclick="onlyOne(this)" validation="required">  <label for="What is your education level?:::Graduate degree" >Graduate degree</label><br/>      <input class="What is your education level?" type="radio" id="What is your education level?:::Other" name="What is your education level?:::Other" value="What is your education level?:::Other" onclick="onlyOne(this)" validation="required">  <label for="What is your education level?:::Other" >Other</label><br/>  </fieldset>
+</form>
+<br>
+<form action="/action_page.php">  <fieldset>  <legend>What is your race?</legend>  <select type="select-one" class="What is your race?" id="8" name="What is your race?:::select-one" validation="required"><option class="What is your race?" id="What is your race?:::White" name="What is your race?:::White" value="White">White</option><option class="What is your race?" id="What is your race?:::Black or African American" name="What is your race?:::Black or African American" value="Black or African American">Black or African American</option><option class="What is your race?" id="What is your race?:::American Indian or Alaska Native" name="What is your race?:::American Indian or Alaska Native" value="American Indian or Alaska Native">American Indian or Alaska Native</option><option class="What is your race?" id="What is your race?:::Asian" name="What is your race?:::Asian" value="Asian">Asian</option><option class="What is your race?" id="What is your race?:::Native Hawaiian or Other Pacific Islander" name="What is your race?:::Native Hawaiian or Other Pacific Islander" value="Native Hawaiian or Other Pacific Islander">Native Hawaiian or Other Pacific Islander</option><option class="What is your race?" id="What is your race?:::Other Race" name="What is your race?:::Other Race" value="Other Race">Other Race</option>  </select>
+</fieldset>
+</form>
+<br>
+<form action="/action_page.php">  <fieldset>  <legend>Please feel free to leave any comments about our study (optional)</legend> <ul class="likert" style="text-align: center;">  <li><label for="Please feel free to leave any comments about our study (optional):::text_box" ></label> <input class="Please feel free to leave any comments about our study (optional)" style="" type="text" id="Please feel free to leave any comments about our study (optional):::text_box" name="Please feel free to leave any comments about our study (optional):::text_box" validation="" > </li> <br/> </ul> </fieldset>
 </form>
 <br>
 
@@ -1157,7 +1226,32 @@
             </div>
           </div>
             <div class="annotation_schema" style="display: grid;grid-template-columns: repeat(1, 1fr);gap: 20px;grid-auto-rows: auto; max-width:400px;">
-                <form action="/action_page.php">  <fieldset>  <legend>What race do you think the patient is? </legend>      <input class="What race do you think the patient is? " type="radio" id="What race do you think the patient is? :::Black" name="What race do you think the patient is? :::Black" value="What race do you think the patient is? :::Black" onclick="onlyOne(this)" validation="required">  <label for="What race do you think the patient is? :::Black" >Black</label><br/>      <input class="What race do you think the patient is? " type="radio" id="What race do you think the patient is? :::White" name="What race do you think the patient is? :::White" value="What race do you think the patient is? :::White" onclick="onlyOne(this)" validation="required">  <label for="What race do you think the patient is? :::White" >White</label><br/>      <input class="What race do you think the patient is? " type="radio" id="What race do you think the patient is? :::Unsure" name="What race do you think the patient is? :::Unsure" value="What race do you think the patient is? :::Unsure" onclick="onlyOne(this)" validation="required">  <label for="What race do you think the patient is? :::Unsure" >Unsure</label><br/>  </fieldset>
+                <form action="/action_page.php">  <fieldset>  <legend>How often do you interact with doctors? </legend>      <input class="How often do you interact with doctors? " type="radio" id="How often do you interact with doctors? :::never" name="How often do you interact with doctors? :::never" value="How often do you interact with doctors? :::never" onclick="onlyOne(this)" validation="required">  <label for="How often do you interact with doctors? :::never" >never</label><br/>      <input class="How often do you interact with doctors? " type="radio" id="How often do you interact with doctors? :::rarely" name="How often do you interact with doctors? :::rarely" value="How often do you interact with doctors? :::rarely" onclick="onlyOne(this)" validation="required">  <label for="How often do you interact with doctors? :::rarely" >rarely</label><br/>      <input class="How often do you interact with doctors? " type="radio" id="How often do you interact with doctors? :::sometimes" name="How often do you interact with doctors? :::sometimes" value="How often do you interact with doctors? :::sometimes" onclick="onlyOne(this)" validation="required">  <label for="How often do you interact with doctors? :::sometimes" >sometimes</label><br/>      <input class="How often do you interact with doctors? " type="radio" id="How often do you interact with doctors? :::very often" name="How often do you interact with doctors? :::very often" value="How often do you interact with doctors? :::very often" onclick="onlyOne(this)" validation="required">  <label for="How often do you interact with doctors? :::very often" >very often</label><br/>      <input class="How often do you interact with doctors? " type="radio" id="How often do you interact with doctors? :::always" name="How often do you interact with doctors? :::always" value="How often do you interact with doctors? :::always" onclick="onlyOne(this)" validation="required">  <label for="How often do you interact with doctors? :::always" >always</label><br/>  </fieldset>
+</form>
+<br>
+<form action="/action_page.php">  <fieldset>  <legend>How would you rate your level of trust toward doctors?</legend>      <input class="How would you rate your level of trust toward doctors?" type="radio" id="How would you rate your level of trust toward doctors?:::not at all" name="How would you rate your level of trust toward doctors?:::not at all" value="How would you rate your level of trust toward doctors?:::not at all" onclick="onlyOne(this)" validation="required">  <label for="How would you rate your level of trust toward doctors?:::not at all" >not at all</label><br/>      <input class="How would you rate your level of trust toward doctors?" type="radio" id="How would you rate your level of trust toward doctors?:::slightly" name="How would you rate your level of trust toward doctors?:::slightly" value="How would you rate your level of trust toward doctors?:::slightly" onclick="onlyOne(this)" validation="required">  <label for="How would you rate your level of trust toward doctors?:::slightly" >slightly</label><br/>      <input class="How would you rate your level of trust toward doctors?" type="radio" id="How would you rate your level of trust toward doctors?:::moderately" name="How would you rate your level of trust toward doctors?:::moderately" value="How would you rate your level of trust toward doctors?:::moderately" onclick="onlyOne(this)" validation="required">  <label for="How would you rate your level of trust toward doctors?:::moderately" >moderately</label><br/>      <input class="How would you rate your level of trust toward doctors?" type="radio" id="How would you rate your level of trust toward doctors?:::very" name="How would you rate your level of trust toward doctors?:::very" value="How would you rate your level of trust toward doctors?:::very" onclick="onlyOne(this)" validation="required">  <label for="How would you rate your level of trust toward doctors?:::very" >very</label><br/>      <input class="How would you rate your level of trust toward doctors?" type="radio" id="How would you rate your level of trust toward doctors?:::extremely" name="How would you rate your level of trust toward doctors?:::extremely" value="How would you rate your level of trust toward doctors?:::extremely" onclick="onlyOne(this)" validation="required">  <label for="How would you rate your level of trust toward doctors?:::extremely" >extremely</label><br/>  </fieldset>
+</form>
+<br>
+<form action="/action_page.php">  <fieldset>  <legend>How would you rate your level of trust toward healthcare professionals in general?</legend>      <input class="How would you rate your level of trust toward healthcare professionals in general?" type="radio" id="How would you rate your level of trust toward healthcare professionals in general?:::not at all" name="How would you rate your level of trust toward healthcare professionals in general?:::not at all" value="How would you rate your level of trust toward healthcare professionals in general?:::not at all" onclick="onlyOne(this)" validation="required">  <label for="How would you rate your level of trust toward healthcare professionals in general?:::not at all" >not at all</label><br/>      <input class="How would you rate your level of trust toward healthcare professionals in general?" type="radio" id="How would you rate your level of trust toward healthcare professionals in general?:::slightly" name="How would you rate your level of trust toward healthcare professionals in general?:::slightly" value="How would you rate your level of trust toward healthcare professionals in general?:::slightly" onclick="onlyOne(this)" validation="required">  <label for="How would you rate your level of trust toward healthcare professionals in general?:::slightly" >slightly</label><br/>      <input class="How would you rate your level of trust toward healthcare professionals in general?" type="radio" id="How would you rate your level of trust toward healthcare professionals in general?:::moderately" name="How would you rate your level of trust toward healthcare professionals in general?:::moderately" value="How would you rate your level of trust toward healthcare professionals in general?:::moderately" onclick="onlyOne(this)" validation="required">  <label for="How would you rate your level of trust toward healthcare professionals in general?:::moderately" >moderately</label><br/>      <input class="How would you rate your level of trust toward healthcare professionals in general?" type="radio" id="How would you rate your level of trust toward healthcare professionals in general?:::very" name="How would you rate your level of trust toward healthcare professionals in general?:::very" value="How would you rate your level of trust toward healthcare professionals in general?:::very" onclick="onlyOne(this)" validation="required">  <label for="How would you rate your level of trust toward healthcare professionals in general?:::very" >very</label><br/>      <input class="How would you rate your level of trust toward healthcare professionals in general?" type="radio" id="How would you rate your level of trust toward healthcare professionals in general?:::extremely" name="How would you rate your level of trust toward healthcare professionals in general?:::extremely" value="How would you rate your level of trust toward healthcare professionals in general?:::extremely" onclick="onlyOne(this)" validation="required">  <label for="How would you rate your level of trust toward healthcare professionals in general?:::extremely" >extremely</label><br/>  </fieldset>
+</form>
+<br>
+<form action="/action_page.php">  <fieldset>  <legend>What is your gender?</legend>      <input class="What is your gender?" type="radio" id="What is your gender?:::Woman" name="What is your gender?:::Woman" value="What is your gender?:::Woman" onclick="onlyOne(this)" validation="required">  <label for="What is your gender?:::Woman" >Woman</label><br/>      <input class="What is your gender?" type="radio" id="What is your gender?:::Man" name="What is your gender?:::Man" value="What is your gender?:::Man" onclick="onlyOne(this)" validation="required">  <label for="What is your gender?:::Man" >Man</label><br/>      <input class="What is your gender?" type="radio" id="What is your gender?:::Non-binary" name="What is your gender?:::Non-binary" value="What is your gender?:::Non-binary" onclick="onlyOne(this)" validation="required">  <label for="What is your gender?:::Non-binary" >Non-binary</label><br/>      <input class="What is your gender?" type="radio" id="What is your gender?:::Prefer not to disclose" name="What is your gender?:::Prefer not to disclose" value="What is your gender?:::Prefer not to disclose" onclick="onlyOne(this)" validation="required">  <label for="What is your gender?:::Prefer not to disclose" >Prefer not to disclose</label><br/>      <input class="What is your gender?" type="radio" id="What is your gender?:::Prefer to self-describe (please specify)" name="What is your gender?:::Prefer to self-describe (please specify)" value="What is your gender?:::Prefer to self-describe (please specify)" onclick="onlyOne(this)" validation="required">  <label for="What is your gender?:::Prefer to self-describe (please specify)" >Prefer to self-describe (please specify)</label><br/> <input class="What is your gender?" type="text" id="What is your gender?:::free_response" name="What is your gender?:::free_response" >  <label for="What is your gender?:::free_response" Entire a label not listed here></label><br/>  </fieldset>
+</form>
+<br>
+<form action="/action_page.php">  <fieldset>  <legend>What is your current age?</legend>  <input class="What is your current age?" style="" type="number" id="What is your current age?:::text_box" name="What is your current age?:::text_box" validation="required">  <label for="What is your current age?:::text_box" ></label><br/>  </fieldset>
+</form>
+<br>
+<form action="/action_page.php">  <fieldset>  <legend>What is your occupation?</legend>      <input class="What is your occupation?" type="radio" id="What is your occupation?:::Employed" name="What is your occupation?:::Employed" value="What is your occupation?:::Employed" onclick="onlyOne(this)" validation="required">  <label for="What is your occupation?:::Employed" >Employed</label><br/>      <input class="What is your occupation?" type="radio" id="What is your occupation?:::Unemployed" name="What is your occupation?:::Unemployed" value="What is your occupation?:::Unemployed" onclick="onlyOne(this)" validation="required">  <label for="What is your occupation?:::Unemployed" >Unemployed</label><br/>      <input class="What is your occupation?" type="radio" id="What is your occupation?:::Student" name="What is your occupation?:::Student" value="What is your occupation?:::Student" onclick="onlyOne(this)" validation="required">  <label for="What is your occupation?:::Student" >Student</label><br/>      <input class="What is your occupation?" type="radio" id="What is your occupation?:::Retired" name="What is your occupation?:::Retired" value="What is your occupation?:::Retired" onclick="onlyOne(this)" validation="required">  <label for="What is your occupation?:::Retired" >Retired</label><br/>      <input class="What is your occupation?" type="radio" id="What is your occupation?:::Homemaker" name="What is your occupation?:::Homemaker" value="What is your occupation?:::Homemaker" onclick="onlyOne(this)" validation="required">  <label for="What is your occupation?:::Homemaker" >Homemaker</label><br/>      <input class="What is your occupation?" type="radio" id="What is your occupation?:::Self-employed" name="What is your occupation?:::Self-employed" value="What is your occupation?:::Self-employed" onclick="onlyOne(this)" validation="required">  <label for="What is your occupation?:::Self-employed" >Self-employed</label><br/>      <input class="What is your occupation?" type="radio" id="What is your occupation?:::Other" name="What is your occupation?:::Other" value="What is your occupation?:::Other" onclick="onlyOne(this)" validation="required">  <label for="What is your occupation?:::Other" >Other</label><br/>  </fieldset>
+</form>
+<br>
+<form action="/action_page.php">  <fieldset>  <legend>What is your education level?</legend>      <input class="What is your education level?" type="radio" id="What is your education level?:::Less than a high school diploma" name="What is your education level?:::Less than a high school diploma" value="What is your education level?:::Less than a high school diploma" onclick="onlyOne(this)" validation="required">  <label for="What is your education level?:::Less than a high school diploma" >Less than a high school diploma</label><br/>      <input class="What is your education level?" type="radio" id="What is your education level?:::High school diploma or equivalent" name="What is your education level?:::High school diploma or equivalent" value="What is your education level?:::High school diploma or equivalent" onclick="onlyOne(this)" validation="required">  <label for="What is your education level?:::High school diploma or equivalent" >High school diploma or equivalent</label><br/>      <input class="What is your education level?" type="radio" id="What is your education level?:::College degree" name="What is your education level?:::College degree" value="What is your education level?:::College degree" onclick="onlyOne(this)" validation="required">  <label for="What is your education level?:::College degree" >College degree</label><br/>      <input class="What is your education level?" type="radio" id="What is your education level?:::Graduate degree" name="What is your education level?:::Graduate degree" value="What is your education level?:::Graduate degree" onclick="onlyOne(this)" validation="required">  <label for="What is your education level?:::Graduate degree" >Graduate degree</label><br/>      <input class="What is your education level?" type="radio" id="What is your education level?:::Other" name="What is your education level?:::Other" value="What is your education level?:::Other" onclick="onlyOne(this)" validation="required">  <label for="What is your education level?:::Other" >Other</label><br/>  </fieldset>
+</form>
+<br>
+<form action="/action_page.php">  <fieldset>  <legend>What is your race?</legend>  <select type="select-one" class="What is your race?" id="8" name="What is your race?:::select-one" validation="required"><option class="What is your race?" id="What is your race?:::White" name="What is your race?:::White" value="White">White</option><option class="What is your race?" id="What is your race?:::Black or African American" name="What is your race?:::Black or African American" value="Black or African American">Black or African American</option><option class="What is your race?" id="What is your race?:::American Indian or Alaska Native" name="What is your race?:::American Indian or Alaska Native" value="American Indian or Alaska Native">American Indian or Alaska Native</option><option class="What is your race?" id="What is your race?:::Asian" name="What is your race?:::Asian" value="Asian">Asian</option><option class="What is your race?" id="What is your race?:::Native Hawaiian or Other Pacific Islander" name="What is your race?:::Native Hawaiian or Other Pacific Islander" value="Native Hawaiian or Other Pacific Islander">Native Hawaiian or Other Pacific Islander</option><option class="What is your race?" id="What is your race?:::Other Race" name="What is your race?:::Other Race" value="Other Race">Other Race</option>  </select>
+</fieldset>
+</form>
+<br>
+<form action="/action_page.php">  <fieldset>  <legend>Please feel free to leave any comments about our study (optional)</legend> <ul class="likert" style="text-align: center;">  <li><label for="Please feel free to leave any comments about our study (optional):::text_box" ></label> <input class="Please feel free to leave any comments about our study (optional)" style="" type="text" id="Please feel free to leave any comments about our study (optional):::text_box" name="Please feel free to leave any comments about our study (optional):::text_box" validation="" > </li> <br/> </ul> </fieldset>
 </form>
 <br>
 

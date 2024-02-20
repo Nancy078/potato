@@ -47,10 +47,9 @@
 
     .instance_text {
         position: fixed;
-        top: 0;
-        left: 0;
         padding: 5px;
-        width: 100%;
+        /* min-width: 5000px; */
+        margin-right: 30px;
     }
 
     /* .instance_text {
@@ -63,7 +62,7 @@
     } */
 
     .container {
-        width: 2000px;
+        /* min-width: 2000px; */
         border: 1px solid #ffffff;
         padding: 5px;
     }
@@ -77,26 +76,28 @@
     } */
 
     .annotation_schema {
-        width: 100%;
+        /* width: 100%; */
         /* padding: 15px; */
         box-sizing: content-box;width: 100%;
-        display: block; /* Change to block to make forms stack vertically */
-        margin-bottom: 10px;
+        display: inline-block; /* Change to block to make forms stack vertically */
+        /* margin-bottom: 10px;
         margin-right: 0%;
         margin-left: 0%;
         margin-top:10px;
         margin-inline: 10px;
         margin-block-start: 0%;
         margin-inline-start: 0%;
-        border-radius: 10px; 
+        border-radius: 10px;  */
         padding: 15px;
+        border-radius: 10px;
         
     }
 
     .annotation_schema form fieldset {
-        display: flex;
+        display: block;
         flex-direction: row;
         align-items: start;
+        border-radius: 10px;
     }
 
     .annotation_schema form fieldset legend {
@@ -105,28 +106,34 @@
         margin-left: 0px;
         margin-inline-start: 0px;
         border-radius: 10px;
+        padding: 10px;
     }
 
     .annotation_schema form fieldset label {
         min-width: 80px;
         margin-right: 0px; 
         margin-left: 0%;
+        border-radius: 10px;
+        padding: 0px;
     
     }
 
     
     .instance {
+       
         border: 1px solid #9cbee2;
         background-color: cccccc;
+        min-width:300px;
+        max-width: 600px;
         border-radius: 10px;
-        padding: 15px;
+        padding: 20px;
         display: block;
         justify-content: center;
-        width: fit-content;
-        width: 500px;
+        /* width: fit-content; */
+        /* min-width: 400px; */
         text-align: left;
         margin: 0 auto;
-        font-size: 14pt;
+        font-size: 12pt;
         /* position: sticky;
         position: -webkit-sticky; */
         top: 0; 
@@ -153,17 +160,18 @@
     fieldset {
         background-color: #ffffff;
         border:1px solid #ffffff;
-        background-color: cccccc;
-        padding: 3px;
+      
+        padding: 0px;
         /* padding: 10px 15px 10px 15px; */
     }
     
     legend {
-        background-color: #2c69a5;
-        color: rgb(255, 255, 255);
-        padding: 7px;
+        /* background-color: #e3f0fc; */
+        background-color: #edf6ff;
+        color: rgb(0, 0, 0);
+        padding: 0px;
         /* padding: 5px 5px; */
-        font-size: 11.5pt;
+        font-size: 12pt;
         font-weight: normal;
     }
 
@@ -174,9 +182,6 @@
         width: 100%;
     }
 
-    .annotation_schema form fieldset label input[type="radio"][value="not_applicable"] {
-        margin-right: 10px; /* Adjust this margin as needed */
-    }
       
     input {
         margin: 5px;
@@ -279,7 +284,7 @@
         max-width: 80%;
         text-align: left;
         margin: 0 auto;
-        font-size: 14pt;               
+        font-size: 12pt;               
     }
 
     
@@ -327,6 +332,45 @@
     
 </style>
 
+<div style="align:center; display:block; justify-content:center;" align="center">
+    <a href="javascript:void(0)" target_id="instructions" onclick="closeNav2 (this.getAttribute('target_id'))">Show/Hide instructions</a>
+  </div>
+  <div class="instructions" id="instructions">
+
+    <p><b>Instructions</b>: This project aims to understand patient perceptions of doctor-patient interactions. In this task, you will be presented with small parts of different conversations between doctors and patients. In each conversation, the patient is diagnosed with prostate cancer and the doctor talks to him about his treatments. Some topics the doctor may discuss are: the patient's health condition, a new trial or treatment, his eligibility to enroll in the trial, and the doctor’s recommendations. There might be family members and healthcare workers present as well.
+
+        </p>
+    <p>  You will rate these parts based on the qualities of the patient (such as competence) and the doctor (such as empathy), You will do this from the point of view of the patient. Some items might not apply to this part of the conversation, so you can put 'not applicable'. Please rate these based on your own understanding of the qualities (agency, competence, partnership-building etc.). </p>
+    </p>
+    <p> 
+        To check out the definition of these qualities, you can click on <b>Annotation Codebook</b> on the top navigation bar. 
+    </p>
+
+    <p>For your convenience, some qualities are defined briefly below:
+        <ul>
+          <li> <b>Competence</b>: The ability to reason, understand relevant information, and assess the situation and its consequences
+          </li>
+          
+          <li> <b>Agency</b>: The ability to contribute and decide on treatment, being an active participant.
+
+          </li>
+          
+          <li> <b>Support</b>: Shows genuine care, putting the patient at ease, reassuring them, and demonstrating concern for their well-being
+
+          </li>
+
+          <li> <b>Partnership</b>:  Encourages open communication, treating the patient as an equal, soliciting their concerns, and thoughts on their treatment and health
+
+
+          </li>
+
+
+        </ul>
+      </p>
+
+  </div>
+
+
 
 <div class="container">
     <div class="row">
@@ -334,7 +378,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div name="context_text" class="instance">
-                        <div name="instance_text" style="max-width: 400px;">
+                        <div name="instance_text" style="min-width: 500px;">
                             
                                 {{instance | safe}}
                         
@@ -347,7 +391,7 @@
         <div class="col-md-6">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="annotation_schema" style="max-width: 400px;">
+                    <div class="annotation_schema" style="min-width: 600px;font-size:15px ">
                        
                         {{annotation_schematic}}
                     </div>

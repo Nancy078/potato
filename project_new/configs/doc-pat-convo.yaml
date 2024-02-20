@@ -1,9 +1,10 @@
 {
-    "port": 9001,
+    "port": 8000,
 
     "server_name": "potato annotator",
 
     "annotation_task_name": "Doctor Patient Conversation Analysis",
+
 
     # Potato will write the annotation file for all annotations to this
     # directory, as well as per-annotator output files and state information
@@ -20,7 +21,7 @@
 
     # If annotators are using a codebook, this will be linked at the top to the
     # instance for easy access
-    "annotation_codebook_url": "",
+    "annotation_codebook_url": "https://docs.google.com/document/d/16ZV4P9lwR8lWbfXLOwvcw7xV4QVGtHXygw1lzo-A3jY/edit?usp=sharing",
 
     "surveyflow": {
       "on": True,
@@ -31,19 +32,20 @@
         ],
 
       "pre_annotation": [
+        # {'file':'surveyflow/instruction.jsonl','text':'Overview of the task'}
         {'file':'surveyflow/instruction.jsonl','text':'Overview of the task'}],
   
       "post_annotation": [
-      {'file':'surveyflow/post_annotation_question.jsonl','text':'Post annotation question'}
+      {'file':'surveyflow/post_annotation_question.jsonl','text':"Thank you for your valuable contributions to our study! Our goal is to understand how doctors can communicate better with patients by looking at different perceptions of the doctors’ qualities. As we analyze different perceptions of doctors' qualities, understanding your personal experiences with the medical system helps contextualize these ratings. We invite you to share insights by answering the following questions. Your answers to these questions are strictly confidential."}
         ],
       # If set, we will automatically generate testing questions similar to the annotation instances, but explicitly ask the annotator to choose one option
-      "testing": [],
+      "testing": ['surveyflow/testing.jsonl'],
     },
 
 
     "data_files": [
     
-       "data/doctor_patient_convo_data_colored.json"
+       "data/doctor_patient_convo_data_relevant_filtered_219.json"
     ],
 
     "item_properties": {
@@ -58,9 +60,11 @@
       #whether do automatic task assignment for annotators, default False.
       "on": True,
       "output_filename": 'task_assignment.json',
-      "sampling_strategy": 'group_random',
+      "sampling_strategy": 'random',
+      # "sampling_strategy": 'group_random',
       "labels_per_instance": 12,
-      "instance_per_annotator": 1,
+      # "instance_per_annotator": 1,
+      "instance_per_annotator": 10,
       "test_question_per_annotator": 0, # you must set up the test question in surveyflow to use this function
 
       "users": [  ],
@@ -83,7 +87,7 @@
     "jumping_to_id_disabled": False,
 
     #the navigation bar will be hidden to the annotators if "hide_navbar" is True
-    "hide_navbar": True,
+    "hide_navbar": False,
 
     #list_as_text is used when the input text is actually a list of texts, usually used for best-worst-scaling or dialogue analysis
     "list_as_text": {
@@ -96,6 +100,43 @@
     "alert_time_each_instance": 10000000,
 
     "annotation_schemes": [
+
+        {
+            "annotation_type": "multirate",
+            "arrangement": "vertical",
+            "name": "select_appropriateness",
+            "description": "Please rate the following qualities of the doctor and the patient.",
+            "labels": ["not at all", "slightly", "moderately", "very", "extremely", "N/A"],
+            "options": [
+
+                {"name": "competence", "label": "<div style=\"background-color:#ffffff\">How <b>intelligent</b> do you think the doctor views you?</div>", },
+                {"name": "agency", "label": "<div style=\"background-color:#ffffff\">Does the doctor view you as an <b>active participant</b> in the conversation?</div>", },
+                {"name": "coomunicator", "label": "<div style=\"background-color:#ffffff\">How good of a <b>communicator</b> do you think the doctor views you?</div>", },
+                {"name": "respect", "label": "<div style=\"background-color:#ffffff\">How <b>respectful</b> is the doctor?</div>", },
+                {"name": "empathetic", "label": "<div style=\"background-color:#ffffff\">How <b>empathetic</b> is the doctor?</div>", },
+                {"name": "warm", "label": "<div style=\"background-color:#ffffff\">How <b>warm</b> is the doctor?</div>", },
+                {"name": "info", "label": "<div style=\"background-color:#ffffff\">Does the doctor give <b>thorough and clear information</b>?</div>", },
+                {"name": "support", "label": "<div style=\"background-color:#ffffff\">Does the doctor show <b>care</b> towards you?</div>", },
+                {"name": "partnership", "label": "<div style=\"background-color:#ffffff\">Does the doctor encourage you to <b>share your opinions</b>?</div>", },
+               
+                # {"name": "competence", "label": "<div style=\"background-color:#ffffff\">How <b>competent</b> do you think the doctor views you?</div>", },
+                # {"name": "agency", "label": "<div style=\"background-color:#ffffff\">How much <b>agency</b> do you think the doctor thinks you have?</div>", },
+                # {"name": "coomunicator", "label": "<div style=\"background-color:#ffffff\">How good of a <b>communicator</b> do you think the doctor views you?</div>", },
+                # {"name": "respect", "label": "<div style=\"background-color:#ffffff\">How <b>respectful</b> is the doctor?</div>", },
+                # {"name": "empathetic", "label": "<div style=\"background-color:#ffffff\">How <b>empathetic</b> is the doctor?</div>", },
+                # {"name": "warm", "label": "<div style=\"background-color:#ffffff\">How <b>warm</b> is the doctor?</div>", },
+                # {"name": "info", "label": "<div style=\"background-color:#ffffff\">How <b>informative</b> is the doctor?</div>", },
+                # {"name": "support", "label": "<div style=\"background-color:#ffffff\">How <b>supportive</b> is the doctor?</div>", },
+                # {"name": "partnership", "label": "<div style=\"background-color:#ffffff\">How much does the doctor build <b>partnership</b>?</div>", },
+               
+            ],
+
+            'has_free_response': False,                      
+            "display_config": {
+                "num_columns": 1,
+                "show_labels_once": True,
+              }
+        },    
     #   {
     #       "annotation_type": "radio",
     #       "name": "observer_competence",
@@ -110,24 +151,10 @@
     #       "sequential_key_binding": True,
     #   },
 
-      {
-          "annotation_type": "radio",
-          "name": "patient_competence",
-          "description": "From the patient's POV, how competent do you think the doctor views you?",
-
-          # If true, display the labels horizontally
-          "horizontal": True,
-
-          "labels": [
-             "low", "slightly low", "medium", "slightly high", "high","N/A"
-          ],
-          "sequential_key_binding": True,
-      },
-
     #   {
     #       "annotation_type": "radio",
-    #       "name": "observer_agency",
-    #       "description": "From an observer's POV, how much agency do you think the patient has?",
+    #       "name": "patient_competence",
+    #       "description": "From the patient's POV, how competent do you think the doctor views you?",
 
     #       # If true, display the labels horizontally
     #       "horizontal": True,
@@ -138,24 +165,24 @@
     #       "sequential_key_binding": True,
     #   },
 
-      {
-          "annotation_type": "radio",
-          "name": "patient_agency",
-          "description": "From the patient's POV, how much agency do you think the doctor thinks you have?",
+    # #   {
+    # #       "annotation_type": "radio",
+    # #       "name": "observer_agency",
+    # #       "description": "From an observer's POV, how much agency do you think the patient has?",
 
-          # If true, display the labels horizontally
-          "horizontal": True,
+    # #       # If true, display the labels horizontally
+    # #       "horizontal": True,
 
-          "labels": [
-             "low", "slightly low", "medium", "slightly high", "high","N/A"
-          ],
-          "sequential_key_binding": True,
-      },
+    # #       "labels": [
+    # #          "low", "slightly low", "medium", "slightly high", "high","N/A"
+    # #       ],
+    # #       "sequential_key_binding": True,
+    # #   },
 
     #   {
     #       "annotation_type": "radio",
-    #       "name": "observer_communicator",
-    #       "description": "From an observer's POV, how good of a communicator is the patient?",
+    #       "name": "patient_agency",
+    #       "description": "From the patient's POV, how much agency do you think the doctor thinks you have?",
 
     #       # If true, display the labels horizontally
     #       "horizontal": True,
@@ -166,103 +193,117 @@
     #       "sequential_key_binding": True,
     #   },
 
-      {
-          "annotation_type": "radio",
-          "name": "patient_communicator",
-          "description": "From the patient's POV, how good of a communicator do you think the doctor views you?",
+    # #   {
+    # #       "annotation_type": "radio",
+    # #       "name": "observer_communicator",
+    # #       "description": "From an observer's POV, how good of a communicator is the patient?",
 
-          # If true, display the labels horizontally
-          "horizontal": True,
+    # #       # If true, display the labels horizontally
+    # #       "horizontal": True,
 
-          "labels": [
-             "low", "slightly low", "medium", "slightly high", "high","N/A"
-          ],
-          "sequential_key_binding": True,
-      },
+    # #       "labels": [
+    # #          "low", "slightly low", "medium", "slightly high", "high","N/A"
+    # #       ],
+    # #       "sequential_key_binding": True,
+    # #   },
 
-      {
-          "annotation_type": "radio",
-          "name": "patient_respect",
-          "description": "From the patient's POV, how respectful is the doctor?",
+    #   {
+    #       "annotation_type": "radio",
+    #       "name": "patient_communicator",
+    #       "description": "From the patient's POV, how good of a communicator do you think the doctor views you?",
 
-          # If true, display the labels horizontally
-          "horizontal": True,
+    #       # If true, display the labels horizontally
+    #       "horizontal": True,
 
-          "labels": [
-             "low", "slightly low", "medium", "slightly high", "high","N/A"
-          ],
-          "sequential_key_binding": True,
-      },
+    #       "labels": [
+    #          "low", "slightly low", "medium", "slightly high", "high","N/A"
+    #       ],
+    #       "sequential_key_binding": True,
+    #   },
 
-      {
-          "annotation_type": "radio",
-          "name": "patient_empathy",
-          "description": "From the patient's POV, how empathetic is the doctor?",
+    #   {
+    #       "annotation_type": "radio",
+    #       "name": "patient_respect",
+    #       "description": "From the patient's POV, how respectful is the doctor?",
 
-          # If true, display the labels horizontally
-          "horizontal": True,
+    #       # If true, display the labels horizontally
+    #       "horizontal": True,
 
-          "labels": [
-             "low", "slightly low", "medium", "slightly high", "high","N/A"
-          ],
-          "sequential_key_binding": True,
-      },
+    #       "labels": [
+    #          "low", "slightly low", "medium", "slightly high", "high","N/A"
+    #       ],
+    #       "sequential_key_binding": True,
+    #   },
 
-      {
-          "annotation_type": "radio",
-          "name": "patient_warmth",
-          "description": "From the patient's POV, how warm is the doctor?",
+    #   {
+    #       "annotation_type": "radio",
+    #       "name": "patient_empathy",
+    #       "description": "From the patient's POV, how empathetic is the doctor?",
 
-          # If true, display the labels horizontally
-          "horizontal": True,
+    #       # If true, display the labels horizontally
+    #       "horizontal": True,
 
-          "labels": [
-             "low", "slightly low", "medium", "slightly high", "high","N/A"
-          ],
-          "sequential_key_binding": True,
-      },
+    #       "labels": [
+    #          "low", "slightly low", "medium", "slightly high", "high","N/A"
+    #       ],
+    #       "sequential_key_binding": True,
+    #   },
 
-      {
-          "annotation_type": "radio",
-          "name": "patient_info",
-          "description": "From the patient's POV, how informative is the doctor?",
+    #   {
+    #       "annotation_type": "radio",
+    #       "name": "patient_warmth",
+    #       "description": "From the patient's POV, how warm is the doctor?",
 
-          # If true, display the labels horizontally
-          "horizontal": True,
+    #       # If true, display the labels horizontally
+    #       "horizontal": True,
 
-          "labels": [
-             "low", "slightly low", "medium", "slightly high", "high","N/A"
-          ],
-          "sequential_key_binding": True,
-      },
+    #       "labels": [
+    #          "low", "slightly low", "medium", "slightly high", "high","N/A"
+    #       ],
+    #       "sequential_key_binding": True,
+    #   },
 
-      {
-          "annotation_type": "radio",
-          "name": "patient_support",
-          "description": "From the patient's POV, how supportive is the doctor?",
+    #   {
+    #       "annotation_type": "radio",
+    #       "name": "patient_info",
+    #       "description": "From the patient's POV, how informative is the doctor?",
 
-          # If true, display the labels horizontally
-          "horizontal": True,
+    #       # If true, display the labels horizontally
+    #       "horizontal": True,
 
-          "labels": [
-             "low", "slightly low", "medium", "slightly high", "high","N/A"
-          ],
-          "sequential_key_binding": True,
-      },
+    #       "labels": [
+    #          "low", "slightly low", "medium", "slightly high", "high","N/A"
+    #       ],
+    #       "sequential_key_binding": True,
+    #   },
 
-      {
-          "annotation_type": "radio",
-          "name": "patient_partner",
-          "description": "From the patient's POV, how much does the doctor build partnership?",
+    #   {
+    #       "annotation_type": "radio",
+    #       "name": "patient_support",
+    #       "description": "From the patient's POV, how supportive is the doctor?",
 
-          # If true, display the labels horizontally
-          "horizontal": False,
+    #       # If true, display the labels horizontally
+    #       "horizontal": True,
 
-          "labels": [
-             "low", "slightly low", "medium", "slightly high", "high","N/A"
-          ],
-          "sequential_key_binding": True,
-      },
+    #       "labels": [
+    #          "low", "slightly low", "medium", "slightly high", "high","N/A"
+    #       ],
+    #       "sequential_key_binding": True,
+    #   },
+
+    #   {
+    #       "annotation_type": "radio",
+    #       "name": "patient_partner",
+    #       "description": "From the patient's POV, how much does the doctor build partnership?",
+
+    #       # If true, display the labels horizontally
+    #       "horizontal": False,
+
+    #       "labels": [
+    #          "low", "slightly low", "medium", "slightly high", "high","N/A"
+    #       ],
+    #       "sequential_key_binding": True,
+    #   },
 
     ],
 

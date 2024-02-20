@@ -1,5 +1,5 @@
 {
-    "port": 8000,
+    "port": 8880,
 
     "server_name": "potato annotator",
 
@@ -39,7 +39,7 @@
       {'file':'surveyflow/post_annotation_question.jsonl','text':"Thank you for your valuable contributions to our study! Our goal is to understand how doctors can communicate better with patients by looking at different perceptions of the doctors’ qualities. As we analyze different perceptions of doctors' qualities, understanding your personal experiences with the medical system helps contextualize these ratings. We invite you to share insights by answering the following questions. Your answers to these questions are strictly confidential."}
         ],
       # If set, we will automatically generate testing questions similar to the annotation instances, but explicitly ask the annotator to choose one option
-      "testing": ['surveyflow/testing.jsonl'],
+      "testing": [],
     },
 
 
@@ -61,7 +61,7 @@
       "on": True,
       "output_filename": 'task_assignment.json',
       "sampling_strategy": 'random',
-      # "sampling_strategy": 'group_random',
+
       "labels_per_instance": 12,
       # "instance_per_annotator": 1,
       "instance_per_annotator": 10,
@@ -109,7 +109,7 @@
             "labels": ["not at all", "slightly", "moderately", "very", "extremely", "N/A"],
             "options": [
 
-                {"name": "competence", "label": "<div style=\"background-color:#ffffff\">How <b>intelligent</b> do you think the doctor views you?</div>", },
+                {"name": "competence", "label": "<div style=\"background-color:#ffffff\">Does the doctor think you  <b>understand and can reason about</b> the situation?</div>", },
                 {"name": "agency", "label": "<div style=\"background-color:#ffffff\">Does the doctor view you as an <b>active participant</b> in the conversation?</div>", },
                 {"name": "coomunicator", "label": "<div style=\"background-color:#ffffff\">How good of a <b>communicator</b> do you think the doctor views you?</div>", },
                 {"name": "respect", "label": "<div style=\"background-color:#ffffff\">How <b>respectful</b> is the doctor?</div>", },

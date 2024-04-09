@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <!--- HEADER GOES BELOW HERE--->
+
+  
+    <head>
+      <!-- <script src="jquery-3.3.1.min.js"></script> -->
+
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="content-type" content="text/html;charset=UTF-8">
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+
+            .row {
+                display: flex;
+                flex-direction: column;
+            }
+
+
+            /*                 border:1px solid black;
+                border-radius: 5px; */
+
+            
+            /* Create two equal columns that sits next to each other */
+            .column {
+                flex: 50%;
+                padding: 15px;
+            }
+            
+            .instance {
+                border:1px solid #070707;
+                background-color: cccccc;
+                border-radius: 5px;
+                padding: 15px;
+                display: block;
+                justify-content: center;
+                width: fit-content;
+                max-width: 80%;
+                text-align: left;
+                margin: 0 auto;
+                font-size: 15pt;
+            }
+
+            .instance p {
+                font-weight: bold;
+                display: block;
+            }
+
+            
+            .annotation_schema {
+                padding: 5px;                
+                display: flex;
+                justify-content: center;
+                width: 80%;
+                text-align: left;
+                margin: 0 auto;
+            }
+           
+            
+            fieldset {
+                background-color: #ededed;
+                border:1px solid #160085;
+                background-color: cccccc;
+                padding: 10px 15px 10px 15px;
+            }
+            
+            legend {
+                background-color: #160085;
+                color: white;
+                padding: 5px 5px;
+                font-size: 13pt;
+                font-weight: bold;
+            }
+
+            input[type="text"] {
+                -webkit-box-sizing: border-box;
+                -moz-box-sizing: border-box;  
+                box-sizing: border-box;
+                width: 100%;
+            }
+              
+            input {
+                margin: 5px;
+            }
+
+
+            .likert li {
+                float: left;
+                list-style-type: none;
+            }
+
+
+            /* The sidepanel menu */
+            .sidepanel {
+                min-height: 250px; /* Specify a height */
+                width: 0; /* 0 width - change this with JavaScript */
+                position: fixed; /* Stay in place */
+                z-index: 1; /* Stay on top */
+                top: 95px;
+                left: 1px;
+                background-color: #111; /* Black*/
+                overflow-x: hidden; /* Disable horizontal scroll */
+                padding-top: 10px; /* Place content 60px from the top */
+                padding-bottom: 20px;
+                transition: 0.5s; /* 0.5 second transition effect to slide in the sidepanel */
+            }
+
+            /* The sidepanel links */
+            .sidepanel a {
+                padding: 8px 8px 8px 32px;
+                text-decoration: none;
+                font-size: 55px;
+                color: #ffffff; /* #818181; */
+                display: block;
+                transition: 0.3s;
+            }
+
+            /* When you mouse over the navigation links, change their color */
+            .sidepanel a:hover {
+                color: #f1f1f1;
+            }
+
+            /* When you mouse over the navigation links, change their color */
+            .sidepanel table {
+                color: #ffffff;
+                font-size: 20px;
+                /*padding: 8px 8px 18px 62px;*/
+                margin-left: 20px;
+                margin-top: 10px;
+                border-spacing: 10px;
+            }
+            
+            .sidepanel td, th  {
+                color: #ffffff;
+                padding: 5px;
+            }
+
+            .sidepanel tr:nth-child(even) {
+                background-color: #333333;
+            }
+                        
+            
+            /* Position and style the close button (top right corner) */
+            .sidepanel .closebtn {
+                position: absolute;
+                top: 0;
+                right: 25px;
+                font-size: 36px;
+                margin-left: 50px;
+            }
+
+            /* Style the button that is used to open the sidepanel */
+            .openbtn {
+                cursor: pointer;
+                /*
+                font-size: 20px;                
+                background-color: #111;
+                color: white;
+                padding: 10px 15px;
+                border: none;*/
+            }
+
+            .openbtn:hover {
+                background-color: #444;
+            } 
+
+            /* The instructions */
+            .instructions {
+                /* width: 0; */ /* 0 width - change this with JavaScript */
+                transition: 0.5s; /* 0.5 second transition effect to slide in the sidepanel */
+                overflow-y: hidden; /* Disable horizontal scroll */
+                border:1px solid #070707;
+                background-color: cccccc;
+                border-radius: 5px;
+                padding: 15px;
+                display: block;
+                justify-content: center;
+                width: fit-content;
+                max-width: 80%;
+                text-align: left;
+                margin: 0 auto;
+                font-size: 14pt;               
+            }
+
+            
+            /* Position and style the close button (top right corner) */
+            .instructions .closebtn {
+                position: absolute;
+                top: 0;
+                right: 25px;
+                font-size: 36px;
+                margin-left: 50px;
+            }
+
+            /* Style the button that is used to open the sidepanel */
+            .instructions .openbtn {
+                cursor: pointer;
+                /*
+                font-size: 20px;                
+                background-color: #111;
+                color: white;
+                padding: 10px 15px;
+                border: none;*/
+            }
+
+            .span_container {
+              border-width:3px;
+              border-style:solid;
+              border: 2px solid black;
+              position: relative;
+              border-radius: 5px;
+              padding: 2px 5px;
+              background-color: pink;
+            }
+            
+            .span_label {
+            position: absolute;
+            top: -12px;
+            left: 5px;
+            font-size: 7px;
+            padding: 1px 1px;
+            border-radius: 3px;
+            background-color: pink;
+            border: 2px solid red;
+            text-align: center;
+            }            
+            
+        </style>
+    </head>
+
+    
+
+
+  <!--- HEADER GOES ABOVE HERE--->
+  
+  <body>
+
+
+
+    <input type="hidden" name="username" id="username" value="{{username}}">
+    <input type="hidden" name="instance_id" id="instance_id" value="{{instance_id}}">
+    <input type="hidden" name="alert_time_each_instance" id="alert_time_each_instance" value="{{alert_time_each_instance}}">
+    <p id="timecounter" hidden>Time spent:</p>
+
+    <div id="mySidepanel" class="sidepanel">
+      <a href="javascript:void(0)" class="closebtn" target_id="mySidepanel" onclick="closeNav(this.getAttribute('target_id'))">&times;</a>
+      <table><tr><th>Key</th><th>Description</th></tr><tr><td style="text-align: center;">&#8592;</td><td>Move backward</td></tr><tr><td style="text-align: center;">&#8594;</td><td>Move forward</td></tr></table>
+    </div>
+
+    <div id="Statpanel" class="sidepanel">
+      <a href="javascript:void(0)" class="closebtn" target_id="Statpanel" onclick="closeNav(this.getAttribute('target_id'))">&times;</a>
+       
+    </div>
+    
+    <script>
+      document.addEventListener('keyup', function (event) {
+          var active_id = document.activeElement.id;
+          var active_type = document.activeElement.getAttribute('type');
+          if (active_id == 'go_to' | active_type == 'text') return;
+
+          //first check whether this keyboard input is a shortcut for checkboxes
+          var checkboxes = document.querySelectorAll('input[type=checkbox]');
+          var radios = document.querySelectorAll('input[type=radio]');
+          var x = event.key.toLowerCase();
+
+          for (var i = 0; i < checkboxes.length; i++) {
+              //alert(checkboxes[i].value)
+              if(x === checkboxes[i].value){
+                  checkboxes[i].checked = !checkboxes[i].checked;
+                  if (checkboxes[i].onclick != null) checkboxes[i].onclick.apply(checkboxes[i]);
+                  return;
+              };
+          }
+          for (var i = 0; i < radios.length; i++) {
+              //alert(checkboxes[i].value)
+              if(x === radios[i].value){
+                  radios[i].checked = !radios[i].checked;
+                  if (radios[i].onclick != null) radios[i].onclick.apply(radios[i]);
+                  return;
+              };
+          }
+
+          // Each time we process a user's key presses, track who is doing
+          // it by grabbing the hidden firstname and lastname fields
+          get_new_instance(event);          
+      });
+
+      function getSelectedText() {
+          var text = "";
+          if (typeof window.getSelection != "undefined") {
+              text = window.getSelection().toString();
+          } else if (typeof document.selection != "undefined" && document.selection.type == "Text") {
+              text = document.selection.createRange().text;
+          }
+          return text;
+      }
+
+      function surroundSelection(selectionLabel, selectionColor)  {
+          //var span = document.createElement("span");
+          //span.style.fontWeight = "bold";
+          //span.style.color = "green";
+   
+          if (window.getSelection) {
+              var sel = window.getSelection();
+
+              // Check that we're labeling something in the instance text that
+              // we want to annotate
+              if (sel.anchorNode.parentElement) {
+
+                  if (sel.anchorNode.parentElement.getAttribute("name") != "instance_text") {
+                      
+                      // See if this text was already wrapped with the currently
+                      // selected class label and if so, remove it
+                      var parentOfSelection = sel.anchorNode.parentElement
+
+                      if (parentOfSelection.getAttribute("selection_label") == selectionLabel) {
+                          // Remove the div tag that has the span's annotation label
+                          $( parentOfSelection ).find("div").remove();
+                          // Remove the span tag that has the highlight box
+                          $( parentOfSelection.firstChild ).unwrap();
+                      }
+
+                      return;
+                  }
+              }
+              else {
+                  // alert("no parent element");
+                  return;
+              }
+              
+              // Otherwise, we're going to be adding a new span annotation, if
+              // the user has selected some non-empty part of th text
+              if (sel.rangeCount && sel.toString().trim().length > 0) {                 
+
+                  tsc = selectionColor.replace(")", ", 0.25)")
+                  
+                  var span = document.createElement("span");
+                  span.className = "span_container";
+                  span.setAttribute("selection_label", selectionLabel);
+                  span.setAttribute("style", "background-color:rgb" + tsc + ";");
+                  console.log(selectionColor);
+                  
+                  var label = document.createElement("div");
+                  label.className = "span_label";
+                  label.textContent = selectionLabel;
+                  label.setAttribute("style", "background-color:white;"
+                                    + "border:2px solid rgb" + selectionColor + ";");
+                  
+                  var range = sel.getRangeAt(0).cloneRange();
+                  range.surroundContents(span);
+                  sel.removeAllRanges();
+                  sel.addRange(range);
+                  span.appendChild(label);
+              }
+          }
+      }
+
+      function changeSpanLabel(checkbox, spanLabel, spanColor) {
+          // Listen for when the user has highlighted some text (only when the label is checked)
+          document.onmouseup = function() {
+              if (checkbox.checked){
+                  surroundSelection(spanLabel, spanColor);
+              }
+          }
+      }
+
+      // Listen for when the user has highlighted some text
+      // document.onmouseup = function() { surroundSelection("Undefined"); } 
+
+    </script>
+    <script>
+      function barValue(range,sibling) {
+          // function used to obtain value for range input
+          sibling.value = range.value;
+          //var x = document.getElementsByClassName(range.className);
+          //var i;
+          //for (i=0: i < x.length; i++) {
+          //    if(x[i].value != range.value) x[i]
+          //}
+      }
+    </script>
+
+    <script>
+      function onlyOne(checkbox) {
+	  // this function is used for the single-choice setting
+	  //alert(checkbox.className)
+	  var x = document.getElementsByClassName(checkbox.className);
+	  var i;
+	  for (i = 0; i < x.length; i++) {
+	      if(x[i].value != checkbox.value) x[i].checked = false;
+	  }
+      }
+    </script>
+
+
+    <script>
+      function whetherNone(checkbox) {
+	  // this function is used to uncheck all the other labels when "None" is checked
+	  //alert(checkbox.className)
+	  var x = document.getElementsByClassName(checkbox.className);
+	  var i;
+	  for (i = 0; i < x.length; i++) {
+              if(checkbox.value == "None" && x[i].value != "None") x[i].checked = false;
+              if(checkbox.value != "None" && x[i].value == "None") x[i].checked = false;
+          }
+
+      }
+    </script>
+
+
+    <script>
+      function click_to_next() {
+          // Gacky code to simulate the submit button as a keyboard event
+          // and not have two separate paths to handle keyboard and mouse
+          // events
+          var e = $.Event('keyup');
+          e.key = "ArrowRight";
+          
+          get_new_instance(e);
+      }
+
+      function click_to_prev() {
+          // Gacky code to simulate the submit button as a keyboard event
+          // and not have two separate paths to handle keyboard and mouse
+          // events
+          var e = $.Event('keyup');
+          e.key = "ArrowLeft";
+          
+          get_new_instance(e);
+      } 
+      
+    </script>
+    
+    {{annotation}}
+    
+    <script>
+      window.onunload = check_close;
+      function check_close() {
+          // console.error("session closed");
+          var post_req = {
+              is_close: "closed"
+          }
+          post(post_req);
+      }
+    </script>
+
+    <script>
+      // Set the date we're counting down to
+      var countDownDate = new Date().getTime();
+
+      // Update the count down every 1 second
+      var x = setInterval(function() {
+
+          // Get today's date and time
+          var now = new Date().getTime();
+
+          // Find the distance between now and the count down date
+          var distance = now - countDownDate;
+
+          // Time calculations for days, hours, minutes and seconds
+          var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+          var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+          var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+          var total_seconds = Math.floor(distance / 1000);
+
+          // Output the result in an element with id="timecounter"
+
+          document.getElementById("timecounter").innerHTML = "Time spent: " + days + "d " + hours + "h "
+              + minutes + "m " + seconds + "s ";
+
+          // TODO: add configurations for alert message and maximum time spent on each instance
+          // If the count down is over, write some text
+
+          var alert_time_each_instance = document.getElementById("alert_time_each_instance").value;
+          if (total_seconds % alert_time_each_instance == 0) {
+              //clearInterval(x);
+              //document.getElementById("timecounter").innerHTML = "EXPIRED";
+              alert("You have spent " + total_seconds + " seconds on this instance")
+          }
+
+      }, 1000);
+    </script>
+    
+    <script>
+      // We submit a new post to the same (user/annotate) endpoint
+      function post(params) {
+          
+          // The rest of this code assumes you are not using a library.
+          // It can be made less wordy if you use one.
+          var form = document.createElement("form");
+          form.setAttribute("method", "post");
+          form.setAttribute("action", "annotate");
+          
+          var hiddenField = document.createElement("input");
+          hiddenField.setAttribute("type", "hidden");
+          hiddenField.setAttribute("name", "email");
+          hiddenField.setAttribute("value", document.getElementById('username').value);
+          form.appendChild(hiddenField);
+          
+          for (var key in params) {
+              if (params.hasOwnProperty(key)) {
+                  var hiddenField = document.createElement("input");
+                  hiddenField.setAttribute("type", "hidden");
+                  hiddenField.setAttribute("name", key);
+                  hiddenField.setAttribute("value", params[key]);
+                  
+                  form.appendChild(hiddenField);
+              }
+          }
+
+          // Stuff all the current annotations into attributes for processing on the server side
+          $('form input, form select, form textarea').each(
+              function(index){  
+                  var input = $(this);
+                  
+                  if (input.attr('type') == 'checkbox' || input.attr('type') == 'radio') {
+                      if (input.is(":checked")) {
+                          // Stuff all the input fields into something for the post
+                          var hiddenField = document.createElement("input");
+                          hiddenField.setAttribute("type", "hidden");
+                          hiddenField.setAttribute("name", input.attr('name'));
+                          hiddenField.setAttribute("value", input.attr('value'));
+                          form.appendChild(hiddenField);
+                      }
+                  }
+                  else if (input.attr('type') == 'text' || input.attr('type') == 'number') {
+                      var hiddenField = document.createElement("input");
+                      hiddenField.setAttribute("type", "hidden");
+                      hiddenField.setAttribute("name", input.attr('name'));
+                      hiddenField.setAttribute("value", input[0].value);
+                      form.appendChild(hiddenField);                                        
+                  }
+                  else if (input.attr('type') == 'range') {
+                      var hiddenField = document.createElement("input");
+                      hiddenField.setAttribute("type", "hidden");
+                      hiddenField.setAttribute("name", input.attr('name'));
+                      hiddenField.setAttribute("value", input[0].value);
+                      form.appendChild(hiddenField);                                        
+                  }
+                  else if (input.attr('type') == 'select-one') {
+                      //alert(input[0].value)
+                      var hiddenField = document.createElement("input");
+                      hiddenField.setAttribute("type", "hidden");
+                      hiddenField.setAttribute("name", input.attr('name'));
+                      hiddenField.setAttribute("value", input[0].value);
+                      form.appendChild(hiddenField);
+                  }
+                  else {
+                      console.log("unknown form type: \"" + input.attr('type') + "\"")
+                  }
+              }
+          );
+
+          // Get all the highlighted text for this instance and marshall that
+          // into some kind of representation for the server side
+          $(".span_container").first().each(
+              function(index) {
+
+                  // we save the outerHTML to accomadate user-defined HTML inputs,
+                  // otherwise we just save the plain text
+                  if ($(this).parent().parent().attr("name") == "instance_text"){
+                      var annotated_spans = $(this).parent().prop('outerHTML');
+                  } else {
+                      var annotated_spans = $(this).parent().prop('innerHTML');
+                  }
+
+                  // Due to the DJ's inability to write decent Javascript, we're
+                  // fully punting on the idea of doing label preprocessing here
+                  // and instead shuttling the entire HTML of the instance to
+                  // the server for python-based processing. The main issue is
+                  // figuring out the precise text offsets of the annotated
+                  // spans while dealing with nested DOM elements.
+                  var hiddenField = document.createElement("input");
+                  hiddenField.setAttribute("type", "hidden");
+                  hiddenField.setAttribute("name", "span-annotation");
+                  hiddenField.setAttribute("value", annotated_spans);
+                  form.appendChild(hiddenField);
+                  //console.log(annotated_spans)
+              }
+          );
+
+          
+          document.body.appendChild(form);
+          form.submit();
+      }
+
+
+       /**
+       * Validate if the input answers meet certain rules
+       * along with any relevant key presses to request a new instance to
+       * annotate.
+       */
+      function validate_answers() {
+
+          // check if all the right labels are checked
+          //alert({{instance_obj|tojson}}['id'])
+          var inputs =  document.querySelectorAll('input[validation=right_label]');
+          for (var i = 0; i < inputs.length; ++i) {
+            if (inputs[i].getAttribute('validation') == 'right_label' && inputs[i].checked == false){
+                alert(inputs[i].name + " must be selected to proceed");
+                //alert(instance_obj.id)
+                return false;
+            }
+          }
+
+
+          // identify all the fieldsets and check if all the required forms are filled
+          var fields = document.getElementsByTagName('fieldset');
+          for (var i = 0; i < fields.length; ++i) {
+                var inputs = fields[i].querySelectorAll('input[validation=required], select[validation=required], textarea[validation=required]');
+
+                // continue if all there's no required inputs in the current field set
+                if (inputs.length == 0){
+                    continue;
+                }
+                //var required = true;
+                // check if the current form requires inputs
+                //if (inputs[0].getAttribute('validation') == 'required'){
+                //    required= true;
+                //}
+
+
+                checked_flag = false;
+                for (var j = 0; j < inputs.length; ++j) {
+                    // if a right_label is not selected, display an error msg and return false
+                    //if (inputs[j].getAttribute('validation') == 'right_label' && inputs[j].checked == false) {
+                    //    alert(inputs[j].name + " must be selected to proceed");
+                        //alert(instance_obj.id)
+                    //    return false;
+                    //}
+                    // if the input is for a span annotation schema, check if the at least some span is annotated or if the
+                    // bad_text label is selected
+                    if (inputs[j].getAttribute("for_span") == "True"){
+                        //alert($(".span_container").length);
+                        if ($(".span_container").length > 0) {
+                            checked_flag = true;
+                            break;
+                        } else if (inputs[j].name.slice(-8) == "bad_text" && inputs[j].checked == true){
+                            checked_flag = true;
+                            break;
+                        }
+                    }
+
+
+                    // if any of the labels is checked, set checked_flag as true;
+                    if (inputs[j].getAttribute("for_span") != "True" && inputs[j].checked == true) {
+
+                        checked_flag = true;
+                        break;
+                    }
+
+                    // if the input_type is number, text, select or textarea, check if it's empty
+                    // todo: the current way might not work well if there are mixed textinput and radio buttons under a sample fieldset
+                    if (inputs[j].type == "text" || inputs[j].tagName == "TEXTAREA" || inputs[j].type == "number" || inputs[j].type == "select-one") {
+                        if (inputs[j].value.length == 0){
+                            alert(inputs[j].name + " must be completed to proceed");
+                            return false;
+                        }
+                        else{
+                            checked_flag = true;
+                        }
+                    }
+                }
+
+
+                // if this form requires inputs, but nothing is checked, display an error msg and return false
+                if (checked_flag == false){
+                    alert("You must answer the following item to proceed: " + inputs[0].className);
+                    return false;
+                }
+                //alert(instance_obj.id)
+          }
+          return true;
+      }
+
+
+      /**
+       * Sends the current state of the instance's annotation to the server,
+       * along with any relevant key presses to request a new instance to
+       * annotate.
+       */
+      function get_new_instance(event) {
+          var x = event.key;
+          var action = ""
+          var ism = ""
+
+          //console.log(x)
+          //console.log(firstname)
+          //console.log(lastname)
+          if (x == "ArrowLeft") { // Spacebar
+              action = "prev_instance";
+          }
+          else if (x == "ArrowRight") {
+              if (validate_answers() == true) {
+                  action = "next_instance";
+              }
+              else{
+                  return;
+              }
+          }
+          else {
+              // console.log("Unknown key press", event)
+              return
+          }
+          
+          var instance_id = document.getElementById('instance_id').value
+          var time_string = document.getElementById("timecounter").innerHTML //get time spent on this instance
+          //time_string = '-1'
+          var post_req = {
+              label: ism,
+              src: action,
+              instance_id: instance_id,
+              behavior_time_string: time_string
+          }
+
+          // Sends the post message to the server which will let us update the
+          // currently displayed content
+          post(post_req)
+      }
+
+    </script>
+
+    <script>
+      $(document).ready(function(){
+          $('[data-toggle="tooltip"]').tooltip();
+      });
+    </script>
+
+
+   
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-3">
+      <div class="container-fluid">
+        <a href="#" class="navbar-brand mr-3">Doctor Patient Conversation Analysis</a>
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <div class="navbar-nav" hidden>
+            <a href="#" class="nav-item nav-link active">Home</a>
+            
+            <a role="button" href="#" class="nav-item nav-link openbtn" target_id="Statpanel" width = "475px" onclick="openNav(this.getAttribute('target_id'),this.getAttribute('width'))">Statistics</a>
+            <a role="button" href="#" class="nav-item nav-link openbtn" target_id="mySidepanel" onclick="openNav(this.getAttribute('target_id'))">Help</a>
+          </div>
+          <div class="p-2 bd-highlight text-secondary align-middle">
+            Finished {{finished}}/{{total_count}}
+          </div>
+          <div class="p-2 bd-highlight text-secondary align-middle">
+            Current_id {{instance_id}}
+          </div>
+          <div class="p-2 bd-highlight text-secondary align-middle">
+            <form action="/annotate" method="post">
+              <fieldset>
+                <input type="hidden" name="firstname" id="a" value="{{firstname}}">
+                <input type="hidden" name="lastname" id="b" value="{{lastname}}">
+                 <input type="hidden" name="email" id="c" value="{{username}}">
+                <input type="hidden" name="src" id="src" value="go_to">
+                <input type="number" name="go_to" id="go_to" value="" onfocusin="user_input()" onfocusout="user_input_leave()" max={{total_count}} min=0 required>
+                <input type="submit" value="go">
+              </fieldset>
+            </form>
+          </div>
+          <div class="navbar-nav ml-auto">
+            <div class="text-secondary align-middle">Currently logged in as {{username}}</div>
+          </div>
+        </div>
+      </div>    
+    </nav>
+    <div class="container-fluid">
+
+      <!--- LAYOUT GOES BELOW HERE --->
+
+      <div class="row">
+  <div class="col-md-12">
+
+    <div class="row">
+      <div class="col-md-12">
+        <div name="context_text" class="instance">
+          <div name="instance_text">
+            {{instance | safe}}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+    <div style="height: 15px;" />
+    
+  </div>
+  <div class="col-md-12">
+    <div class="annotation_schema" style="flex-direction:column;">
+      <form action="/action_page.php">  <fieldset>  <legend>About how long has it been since you last saw a doctor or other health professional about your health?</legend>      <input class="About how long has it been since you last saw a doctor or other health professional about your health?" type="radio" id="About how long has it been since you last saw a doctor or other health professional about your health?:::Never" name="About how long has it been since you last saw a doctor or other health professional about your health?:::Never" value="About how long has it been since you last saw a doctor or other health professional about your health?:::Never" onclick="onlyOne(this)" validation="">  <label for="About how long has it been since you last saw a doctor or other health professional about your health?:::Never" >Never</label><br/>      <input class="About how long has it been since you last saw a doctor or other health professional about your health?" type="radio" id="About how long has it been since you last saw a doctor or other health professional about your health?:::Within the past year (anytime less than 12 months ago)" name="About how long has it been since you last saw a doctor or other health professional about your health?:::Within the past year (anytime less than 12 months ago)" value="About how long has it been since you last saw a doctor or other health professional about your health?:::Within the past year (anytime less than 12 months ago)" onclick="onlyOne(this)" validation="">  <label for="About how long has it been since you last saw a doctor or other health professional about your health?:::Within the past year (anytime less than 12 months ago)" >Within the past year (anytime less than 12 months ago)</label><br/>      <input class="About how long has it been since you last saw a doctor or other health professional about your health?" type="radio" id="About how long has it been since you last saw a doctor or other health professional about your health?:::Within the last 2 years (1 year but less than 2 years ago)" name="About how long has it been since you last saw a doctor or other health professional about your health?:::Within the last 2 years (1 year but less than 2 years ago)" value="About how long has it been since you last saw a doctor or other health professional about your health?:::Within the last 2 years (1 year but less than 2 years ago)" onclick="onlyOne(this)" validation="">  <label for="About how long has it been since you last saw a doctor or other health professional about your health?:::Within the last 2 years (1 year but less than 2 years ago)" >Within the last 2 years (1 year but less than 2 years ago)</label><br/>      <input class="About how long has it been since you last saw a doctor or other health professional about your health?" type="radio" id="About how long has it been since you last saw a doctor or other health professional about your health?:::Within the last 3 years (2 years but less than 3 years ago)" name="About how long has it been since you last saw a doctor or other health professional about your health?:::Within the last 3 years (2 years but less than 3 years ago)" value="About how long has it been since you last saw a doctor or other health professional about your health?:::Within the last 3 years (2 years but less than 3 years ago)" onclick="onlyOne(this)" validation="">  <label for="About how long has it been since you last saw a doctor or other health professional about your health?:::Within the last 3 years (2 years but less than 3 years ago)" >Within the last 3 years (2 years but less than 3 years ago)</label><br/>      <input class="About how long has it been since you last saw a doctor or other health professional about your health?" type="radio" id="About how long has it been since you last saw a doctor or other health professional about your health?:::Within the last 5 years (3 years but less than 5 years ago)" name="About how long has it been since you last saw a doctor or other health professional about your health?:::Within the last 5 years (3 years but less than 5 years ago)" value="About how long has it been since you last saw a doctor or other health professional about your health?:::Within the last 5 years (3 years but less than 5 years ago)" onclick="onlyOne(this)" validation="">  <label for="About how long has it been since you last saw a doctor or other health professional about your health?:::Within the last 5 years (3 years but less than 5 years ago)" >Within the last 5 years (3 years but less than 5 years ago)</label><br/>      <input class="About how long has it been since you last saw a doctor or other health professional about your health?" type="radio" id="About how long has it been since you last saw a doctor or other health professional about your health?:::Within the last 10 years (5 years but less than 10 years ago)" name="About how long has it been since you last saw a doctor or other health professional about your health?:::Within the last 10 years (5 years but less than 10 years ago)" value="About how long has it been since you last saw a doctor or other health professional about your health?:::Within the last 10 years (5 years but less than 10 years ago)" onclick="onlyOne(this)" validation="">  <label for="About how long has it been since you last saw a doctor or other health professional about your health?:::Within the last 10 years (5 years but less than 10 years ago)" >Within the last 10 years (5 years but less than 10 years ago)</label><br/>      <input class="About how long has it been since you last saw a doctor or other health professional about your health?" type="radio" id="About how long has it been since you last saw a doctor or other health professional about your health?:::10 years ago or more" name="About how long has it been since you last saw a doctor or other health professional about your health?:::10 years ago or more" value="About how long has it been since you last saw a doctor or other health professional about your health?:::10 years ago or more" onclick="onlyOne(this)" validation="">  <label for="About how long has it been since you last saw a doctor or other health professional about your health?:::10 years ago or more" >10 years ago or more</label><br/>      <input class="About how long has it been since you last saw a doctor or other health professional about your health?" type="radio" id="About how long has it been since you last saw a doctor or other health professional about your health?:::Don't know" name="About how long has it been since you last saw a doctor or other health professional about your health?:::Don't know" value="About how long has it been since you last saw a doctor or other health professional about your health?:::Don't know" onclick="onlyOne(this)" validation="">  <label for="About how long has it been since you last saw a doctor or other health professional about your health?:::Don't know" >Don't know</label><br/>  </fieldset>
+</form>
+<br>
+<form action="/action_page.php">  <fieldset>  <legend>During the past 12 months, not counting times you went to an emergency room, how many times did you go to a doctor, nurse, or other health professional to get care for yourself?</legend>      <input class="During the past 12 months, not counting times you went to an emergency room, how many times did you go to a doctor, nurse, or other health professional to get care for yourself?" type="radio" id="During the past 12 months, not counting times you went to an emergency room, how many times did you go to a doctor, nurse, or other health professional to get care for yourself?:::None" name="During the past 12 months, not counting times you went to an emergency room, how many times did you go to a doctor, nurse, or other health professional to get care for yourself?:::None" value="During the past 12 months, not counting times you went to an emergency room, how many times did you go to a doctor, nurse, or other health professional to get care for yourself?:::None" onclick="onlyOne(this)" validation="">  <label for="During the past 12 months, not counting times you went to an emergency room, how many times did you go to a doctor, nurse, or other health professional to get care for yourself?:::None" >None</label><br/>      <input class="During the past 12 months, not counting times you went to an emergency room, how many times did you go to a doctor, nurse, or other health professional to get care for yourself?" type="radio" id="During the past 12 months, not counting times you went to an emergency room, how many times did you go to a doctor, nurse, or other health professional to get care for yourself?:::1 time" name="During the past 12 months, not counting times you went to an emergency room, how many times did you go to a doctor, nurse, or other health professional to get care for yourself?:::1 time" value="During the past 12 months, not counting times you went to an emergency room, how many times did you go to a doctor, nurse, or other health professional to get care for yourself?:::1 time" onclick="onlyOne(this)" validation="">  <label for="During the past 12 months, not counting times you went to an emergency room, how many times did you go to a doctor, nurse, or other health professional to get care for yourself?:::1 time" >1 time</label><br/>      <input class="During the past 12 months, not counting times you went to an emergency room, how many times did you go to a doctor, nurse, or other health professional to get care for yourself?" type="radio" id="During the past 12 months, not counting times you went to an emergency room, how many times did you go to a doctor, nurse, or other health professional to get care for yourself?:::2 times" name="During the past 12 months, not counting times you went to an emergency room, how many times did you go to a doctor, nurse, or other health professional to get care for yourself?:::2 times" value="During the past 12 months, not counting times you went to an emergency room, how many times did you go to a doctor, nurse, or other health professional to get care for yourself?:::2 times" onclick="onlyOne(this)" validation="">  <label for="During the past 12 months, not counting times you went to an emergency room, how many times did you go to a doctor, nurse, or other health professional to get care for yourself?:::2 times" >2 times</label><br/>      <input class="During the past 12 months, not counting times you went to an emergency room, how many times did you go to a doctor, nurse, or other health professional to get care for yourself?" type="radio" id="During the past 12 months, not counting times you went to an emergency room, how many times did you go to a doctor, nurse, or other health professional to get care for yourself?:::3 times" name="During the past 12 months, not counting times you went to an emergency room, how many times did you go to a doctor, nurse, or other health professional to get care for yourself?:::3 times" value="During the past 12 months, not counting times you went to an emergency room, how many times did you go to a doctor, nurse, or other health professional to get care for yourself?:::3 times" onclick="onlyOne(this)" validation="">  <label for="During the past 12 months, not counting times you went to an emergency room, how many times did you go to a doctor, nurse, or other health professional to get care for yourself?:::3 times" >3 times</label><br/>      <input class="During the past 12 months, not counting times you went to an emergency room, how many times did you go to a doctor, nurse, or other health professional to get care for yourself?" type="radio" id="During the past 12 months, not counting times you went to an emergency room, how many times did you go to a doctor, nurse, or other health professional to get care for yourself?:::4 times" name="During the past 12 months, not counting times you went to an emergency room, how many times did you go to a doctor, nurse, or other health professional to get care for yourself?:::4 times" value="During the past 12 months, not counting times you went to an emergency room, how many times did you go to a doctor, nurse, or other health professional to get care for yourself?:::4 times" onclick="onlyOne(this)" validation="">  <label for="During the past 12 months, not counting times you went to an emergency room, how many times did you go to a doctor, nurse, or other health professional to get care for yourself?:::4 times" >4 times</label><br/>      <input class="During the past 12 months, not counting times you went to an emergency room, how many times did you go to a doctor, nurse, or other health professional to get care for yourself?" type="radio" id="During the past 12 months, not counting times you went to an emergency room, how many times did you go to a doctor, nurse, or other health professional to get care for yourself?:::5-9 times" name="During the past 12 months, not counting times you went to an emergency room, how many times did you go to a doctor, nurse, or other health professional to get care for yourself?:::5-9 times" value="During the past 12 months, not counting times you went to an emergency room, how many times did you go to a doctor, nurse, or other health professional to get care for yourself?:::5-9 times" onclick="onlyOne(this)" validation="">  <label for="During the past 12 months, not counting times you went to an emergency room, how many times did you go to a doctor, nurse, or other health professional to get care for yourself?:::5-9 times" >5-9 times</label><br/>      <input class="During the past 12 months, not counting times you went to an emergency room, how many times did you go to a doctor, nurse, or other health professional to get care for yourself?" type="radio" id="During the past 12 months, not counting times you went to an emergency room, how many times did you go to a doctor, nurse, or other health professional to get care for yourself?:::10 or more times" name="During the past 12 months, not counting times you went to an emergency room, how many times did you go to a doctor, nurse, or other health professional to get care for yourself?:::10 or more times" value="During the past 12 months, not counting times you went to an emergency room, how many times did you go to a doctor, nurse, or other health professional to get care for yourself?:::10 or more times" onclick="onlyOne(this)" validation="">  <label for="During the past 12 months, not counting times you went to an emergency room, how many times did you go to a doctor, nurse, or other health professional to get care for yourself?:::10 or more times" >10 or more times</label><br/>  </fieldset>
+</form>
+<br>
+<Strong>Please indicate the extent to which you agree or disagree with each of the following statements</Strong>  <br>
+<Strong> </Strong>  <br>
+<form action="/action_page.php">  <fieldset>  <legend>Sometimes doctors care more about what is convenient for them than about their patients' medical needs.</legend>      <input class="Sometimes doctors care more about what is convenient for them than about their patients' medical needs." type="radio" id="Sometimes doctors care more about what is convenient for them than about their patients' medical needs.:::strongly agree" name="Sometimes doctors care more about what is convenient for them than about their patients' medical needs.:::strongly agree" value="Sometimes doctors care more about what is convenient for them than about their patients' medical needs.:::strongly agree" onclick="onlyOne(this)" validation="">  <label for="Sometimes doctors care more about what is convenient for them than about their patients' medical needs.:::strongly agree" >strongly agree</label><br/>      <input class="Sometimes doctors care more about what is convenient for them than about their patients' medical needs." type="radio" id="Sometimes doctors care more about what is convenient for them than about their patients' medical needs.:::agree" name="Sometimes doctors care more about what is convenient for them than about their patients' medical needs.:::agree" value="Sometimes doctors care more about what is convenient for them than about their patients' medical needs.:::agree" onclick="onlyOne(this)" validation="">  <label for="Sometimes doctors care more about what is convenient for them than about their patients' medical needs.:::agree" >agree</label><br/>      <input class="Sometimes doctors care more about what is convenient for them than about their patients' medical needs." type="radio" id="Sometimes doctors care more about what is convenient for them than about their patients' medical needs.:::neutral" name="Sometimes doctors care more about what is convenient for them than about their patients' medical needs.:::neutral" value="Sometimes doctors care more about what is convenient for them than about their patients' medical needs.:::neutral" onclick="onlyOne(this)" validation="">  <label for="Sometimes doctors care more about what is convenient for them than about their patients' medical needs.:::neutral" >neutral</label><br/>      <input class="Sometimes doctors care more about what is convenient for them than about their patients' medical needs." type="radio" id="Sometimes doctors care more about what is convenient for them than about their patients' medical needs.:::disagree" name="Sometimes doctors care more about what is convenient for them than about their patients' medical needs.:::disagree" value="Sometimes doctors care more about what is convenient for them than about their patients' medical needs.:::disagree" onclick="onlyOne(this)" validation="">  <label for="Sometimes doctors care more about what is convenient for them than about their patients' medical needs.:::disagree" >disagree</label><br/>      <input class="Sometimes doctors care more about what is convenient for them than about their patients' medical needs." type="radio" id="Sometimes doctors care more about what is convenient for them than about their patients' medical needs.::: strongly disagree" name="Sometimes doctors care more about what is convenient for them than about their patients' medical needs.::: strongly disagree" value="Sometimes doctors care more about what is convenient for them than about their patients' medical needs.::: strongly disagree" onclick="onlyOne(this)" validation="">  <label for="Sometimes doctors care more about what is convenient for them than about their patients' medical needs.::: strongly disagree" > strongly disagree</label><br/>  </fieldset>
+</form>
+<br>
+<form action="/action_page.php">  <fieldset>  <legend>Doctors are extremely thorough and careful.</legend>      <input class="Doctors are extremely thorough and careful." type="radio" id="Doctors are extremely thorough and careful.:::strongly agree" name="Doctors are extremely thorough and careful.:::strongly agree" value="Doctors are extremely thorough and careful.:::strongly agree" onclick="onlyOne(this)" validation="">  <label for="Doctors are extremely thorough and careful.:::strongly agree" >strongly agree</label><br/>      <input class="Doctors are extremely thorough and careful." type="radio" id="Doctors are extremely thorough and careful.:::agree" name="Doctors are extremely thorough and careful.:::agree" value="Doctors are extremely thorough and careful.:::agree" onclick="onlyOne(this)" validation="">  <label for="Doctors are extremely thorough and careful.:::agree" >agree</label><br/>      <input class="Doctors are extremely thorough and careful." type="radio" id="Doctors are extremely thorough and careful.:::neutral" name="Doctors are extremely thorough and careful.:::neutral" value="Doctors are extremely thorough and careful.:::neutral" onclick="onlyOne(this)" validation="">  <label for="Doctors are extremely thorough and careful.:::neutral" >neutral</label><br/>      <input class="Doctors are extremely thorough and careful." type="radio" id="Doctors are extremely thorough and careful.:::disagree" name="Doctors are extremely thorough and careful.:::disagree" value="Doctors are extremely thorough and careful.:::disagree" onclick="onlyOne(this)" validation="">  <label for="Doctors are extremely thorough and careful.:::disagree" >disagree</label><br/>      <input class="Doctors are extremely thorough and careful." type="radio" id="Doctors are extremely thorough and careful.::: strongly disagree" name="Doctors are extremely thorough and careful.::: strongly disagree" value="Doctors are extremely thorough and careful.::: strongly disagree" onclick="onlyOne(this)" validation="">  <label for="Doctors are extremely thorough and careful.::: strongly disagree" > strongly disagree</label><br/>  </fieldset>
+</form>
+<br>
+<form action="/action_page.php">  <fieldset>  <legend>You completely trust doctors' decisions about which medical treatments are best.</legend>      <input class="You completely trust doctors' decisions about which medical treatments are best." type="radio" id="You completely trust doctors' decisions about which medical treatments are best.:::strongly agree" name="You completely trust doctors' decisions about which medical treatments are best.:::strongly agree" value="You completely trust doctors' decisions about which medical treatments are best.:::strongly agree" onclick="onlyOne(this)" validation="">  <label for="You completely trust doctors' decisions about which medical treatments are best.:::strongly agree" >strongly agree</label><br/>      <input class="You completely trust doctors' decisions about which medical treatments are best." type="radio" id="You completely trust doctors' decisions about which medical treatments are best.:::agree" name="You completely trust doctors' decisions about which medical treatments are best.:::agree" value="You completely trust doctors' decisions about which medical treatments are best.:::agree" onclick="onlyOne(this)" validation="">  <label for="You completely trust doctors' decisions about which medical treatments are best.:::agree" >agree</label><br/>      <input class="You completely trust doctors' decisions about which medical treatments are best." type="radio" id="You completely trust doctors' decisions about which medical treatments are best.:::neutral" name="You completely trust doctors' decisions about which medical treatments are best.:::neutral" value="You completely trust doctors' decisions about which medical treatments are best.:::neutral" onclick="onlyOne(this)" validation="">  <label for="You completely trust doctors' decisions about which medical treatments are best.:::neutral" >neutral</label><br/>      <input class="You completely trust doctors' decisions about which medical treatments are best." type="radio" id="You completely trust doctors' decisions about which medical treatments are best.:::disagree" name="You completely trust doctors' decisions about which medical treatments are best.:::disagree" value="You completely trust doctors' decisions about which medical treatments are best.:::disagree" onclick="onlyOne(this)" validation="">  <label for="You completely trust doctors' decisions about which medical treatments are best.:::disagree" >disagree</label><br/>      <input class="You completely trust doctors' decisions about which medical treatments are best." type="radio" id="You completely trust doctors' decisions about which medical treatments are best.::: strongly disagree" name="You completely trust doctors' decisions about which medical treatments are best.::: strongly disagree" value="You completely trust doctors' decisions about which medical treatments are best.::: strongly disagree" onclick="onlyOne(this)" validation="">  <label for="You completely trust doctors' decisions about which medical treatments are best.::: strongly disagree" > strongly disagree</label><br/>  </fieldset>
+</form>
+<br>
+<form action="/action_page.php">  <fieldset>  <legend>A doctor would never mislead you about anything.</legend>      <input class="A doctor would never mislead you about anything." type="radio" id="A doctor would never mislead you about anything.:::strongly agree" name="A doctor would never mislead you about anything.:::strongly agree" value="A doctor would never mislead you about anything.:::strongly agree" onclick="onlyOne(this)" validation="">  <label for="A doctor would never mislead you about anything.:::strongly agree" >strongly agree</label><br/>      <input class="A doctor would never mislead you about anything." type="radio" id="A doctor would never mislead you about anything.:::agree" name="A doctor would never mislead you about anything.:::agree" value="A doctor would never mislead you about anything.:::agree" onclick="onlyOne(this)" validation="">  <label for="A doctor would never mislead you about anything.:::agree" >agree</label><br/>      <input class="A doctor would never mislead you about anything." type="radio" id="A doctor would never mislead you about anything.:::neutral" name="A doctor would never mislead you about anything.:::neutral" value="A doctor would never mislead you about anything.:::neutral" onclick="onlyOne(this)" validation="">  <label for="A doctor would never mislead you about anything.:::neutral" >neutral</label><br/>      <input class="A doctor would never mislead you about anything." type="radio" id="A doctor would never mislead you about anything.:::disagree" name="A doctor would never mislead you about anything.:::disagree" value="A doctor would never mislead you about anything.:::disagree" onclick="onlyOne(this)" validation="">  <label for="A doctor would never mislead you about anything.:::disagree" >disagree</label><br/>      <input class="A doctor would never mislead you about anything." type="radio" id="A doctor would never mislead you about anything.::: strongly disagree" name="A doctor would never mislead you about anything.::: strongly disagree" value="A doctor would never mislead you about anything.::: strongly disagree" onclick="onlyOne(this)" validation="">  <label for="A doctor would never mislead you about anything.::: strongly disagree" > strongly disagree</label><br/>  </fieldset>
+</form>
+<br>
+<form action="/action_page.php">  <fieldset>  <legend>All in all, you trust doctors completely.</legend>      <input class="All in all, you trust doctors completely." type="radio" id="All in all, you trust doctors completely.:::strongly agree" name="All in all, you trust doctors completely.:::strongly agree" value="All in all, you trust doctors completely.:::strongly agree" onclick="onlyOne(this)" validation="">  <label for="All in all, you trust doctors completely.:::strongly agree" >strongly agree</label><br/>      <input class="All in all, you trust doctors completely." type="radio" id="All in all, you trust doctors completely.:::agree" name="All in all, you trust doctors completely.:::agree" value="All in all, you trust doctors completely.:::agree" onclick="onlyOne(this)" validation="">  <label for="All in all, you trust doctors completely.:::agree" >agree</label><br/>      <input class="All in all, you trust doctors completely." type="radio" id="All in all, you trust doctors completely.:::neutral" name="All in all, you trust doctors completely.:::neutral" value="All in all, you trust doctors completely.:::neutral" onclick="onlyOne(this)" validation="">  <label for="All in all, you trust doctors completely.:::neutral" >neutral</label><br/>      <input class="All in all, you trust doctors completely." type="radio" id="All in all, you trust doctors completely.:::disagree" name="All in all, you trust doctors completely.:::disagree" value="All in all, you trust doctors completely.:::disagree" onclick="onlyOne(this)" validation="">  <label for="All in all, you trust doctors completely.:::disagree" >disagree</label><br/>      <input class="All in all, you trust doctors completely." type="radio" id="All in all, you trust doctors completely.::: strongly disagree" name="All in all, you trust doctors completely.::: strongly disagree" value="All in all, you trust doctors completely.::: strongly disagree" onclick="onlyOne(this)" validation="">  <label for="All in all, you trust doctors completely.::: strongly disagree" > strongly disagree</label><br/>  </fieldset>
+</form>
+<br>
+<form action="/action_page.php">  <fieldset>  <legend>People of my ethnic group receive the same medical care from doctors and healthcare workers as people from other groups</legend>      <input class="People of my ethnic group receive the same medical care from doctors and healthcare workers as people from other groups" type="radio" id="People of my ethnic group receive the same medical care from doctors and healthcare workers as people from other groups:::strongly agree" name="People of my ethnic group receive the same medical care from doctors and healthcare workers as people from other groups:::strongly agree" value="People of my ethnic group receive the same medical care from doctors and healthcare workers as people from other groups:::strongly agree" onclick="onlyOne(this)" validation="">  <label for="People of my ethnic group receive the same medical care from doctors and healthcare workers as people from other groups:::strongly agree" >strongly agree</label><br/>      <input class="People of my ethnic group receive the same medical care from doctors and healthcare workers as people from other groups" type="radio" id="People of my ethnic group receive the same medical care from doctors and healthcare workers as people from other groups:::agree" name="People of my ethnic group receive the same medical care from doctors and healthcare workers as people from other groups:::agree" value="People of my ethnic group receive the same medical care from doctors and healthcare workers as people from other groups:::agree" onclick="onlyOne(this)" validation="">  <label for="People of my ethnic group receive the same medical care from doctors and healthcare workers as people from other groups:::agree" >agree</label><br/>      <input class="People of my ethnic group receive the same medical care from doctors and healthcare workers as people from other groups" type="radio" id="People of my ethnic group receive the same medical care from doctors and healthcare workers as people from other groups:::neutral" name="People of my ethnic group receive the same medical care from doctors and healthcare workers as people from other groups:::neutral" value="People of my ethnic group receive the same medical care from doctors and healthcare workers as people from other groups:::neutral" onclick="onlyOne(this)" validation="">  <label for="People of my ethnic group receive the same medical care from doctors and healthcare workers as people from other groups:::neutral" >neutral</label><br/>      <input class="People of my ethnic group receive the same medical care from doctors and healthcare workers as people from other groups" type="radio" id="People of my ethnic group receive the same medical care from doctors and healthcare workers as people from other groups:::disagree" name="People of my ethnic group receive the same medical care from doctors and healthcare workers as people from other groups:::disagree" value="People of my ethnic group receive the same medical care from doctors and healthcare workers as people from other groups:::disagree" onclick="onlyOne(this)" validation="">  <label for="People of my ethnic group receive the same medical care from doctors and healthcare workers as people from other groups:::disagree" >disagree</label><br/>      <input class="People of my ethnic group receive the same medical care from doctors and healthcare workers as people from other groups" type="radio" id="People of my ethnic group receive the same medical care from doctors and healthcare workers as people from other groups::: strongly disagree" name="People of my ethnic group receive the same medical care from doctors and healthcare workers as people from other groups::: strongly disagree" value="People of my ethnic group receive the same medical care from doctors and healthcare workers as people from other groups::: strongly disagree" onclick="onlyOne(this)" validation="">  <label for="People of my ethnic group receive the same medical care from doctors and healthcare workers as people from other groups::: strongly disagree" > strongly disagree</label><br/>  </fieldset>
+</form>
+<br>
+<form action="/action_page.php">  <fieldset>  <legend>People of my ethnic group are treated the same as people of other groups by doctors and healthcare workers</legend>      <input class="People of my ethnic group are treated the same as people of other groups by doctors and healthcare workers" type="radio" id="People of my ethnic group are treated the same as people of other groups by doctors and healthcare workers:::strongly agree" name="People of my ethnic group are treated the same as people of other groups by doctors and healthcare workers:::strongly agree" value="People of my ethnic group are treated the same as people of other groups by doctors and healthcare workers:::strongly agree" onclick="onlyOne(this)" validation="">  <label for="People of my ethnic group are treated the same as people of other groups by doctors and healthcare workers:::strongly agree" >strongly agree</label><br/>      <input class="People of my ethnic group are treated the same as people of other groups by doctors and healthcare workers" type="radio" id="People of my ethnic group are treated the same as people of other groups by doctors and healthcare workers:::agree" name="People of my ethnic group are treated the same as people of other groups by doctors and healthcare workers:::agree" value="People of my ethnic group are treated the same as people of other groups by doctors and healthcare workers:::agree" onclick="onlyOne(this)" validation="">  <label for="People of my ethnic group are treated the same as people of other groups by doctors and healthcare workers:::agree" >agree</label><br/>      <input class="People of my ethnic group are treated the same as people of other groups by doctors and healthcare workers" type="radio" id="People of my ethnic group are treated the same as people of other groups by doctors and healthcare workers:::neutral" name="People of my ethnic group are treated the same as people of other groups by doctors and healthcare workers:::neutral" value="People of my ethnic group are treated the same as people of other groups by doctors and healthcare workers:::neutral" onclick="onlyOne(this)" validation="">  <label for="People of my ethnic group are treated the same as people of other groups by doctors and healthcare workers:::neutral" >neutral</label><br/>      <input class="People of my ethnic group are treated the same as people of other groups by doctors and healthcare workers" type="radio" id="People of my ethnic group are treated the same as people of other groups by doctors and healthcare workers:::disagree" name="People of my ethnic group are treated the same as people of other groups by doctors and healthcare workers:::disagree" value="People of my ethnic group are treated the same as people of other groups by doctors and healthcare workers:::disagree" onclick="onlyOne(this)" validation="">  <label for="People of my ethnic group are treated the same as people of other groups by doctors and healthcare workers:::disagree" >disagree</label><br/>      <input class="People of my ethnic group are treated the same as people of other groups by doctors and healthcare workers" type="radio" id="People of my ethnic group are treated the same as people of other groups by doctors and healthcare workers::: strongly disagree" name="People of my ethnic group are treated the same as people of other groups by doctors and healthcare workers::: strongly disagree" value="People of my ethnic group are treated the same as people of other groups by doctors and healthcare workers::: strongly disagree" onclick="onlyOne(this)" validation="">  <label for="People of my ethnic group are treated the same as people of other groups by doctors and healthcare workers::: strongly disagree" > strongly disagree</label><br/>  </fieldset>
+</form>
+<br>
+<form action="/action_page.php">  <fieldset>  <legend>Doctors have the best interests of people of my ethnic group in mind</legend>      <input class="Doctors have the best interests of people of my ethnic group in mind" type="radio" id="Doctors have the best interests of people of my ethnic group in mind:::strongly agree" name="Doctors have the best interests of people of my ethnic group in mind:::strongly agree" value="Doctors have the best interests of people of my ethnic group in mind:::strongly agree" onclick="onlyOne(this)" validation="">  <label for="Doctors have the best interests of people of my ethnic group in mind:::strongly agree" >strongly agree</label><br/>      <input class="Doctors have the best interests of people of my ethnic group in mind" type="radio" id="Doctors have the best interests of people of my ethnic group in mind:::agree" name="Doctors have the best interests of people of my ethnic group in mind:::agree" value="Doctors have the best interests of people of my ethnic group in mind:::agree" onclick="onlyOne(this)" validation="">  <label for="Doctors have the best interests of people of my ethnic group in mind:::agree" >agree</label><br/>      <input class="Doctors have the best interests of people of my ethnic group in mind" type="radio" id="Doctors have the best interests of people of my ethnic group in mind:::neutral" name="Doctors have the best interests of people of my ethnic group in mind:::neutral" value="Doctors have the best interests of people of my ethnic group in mind:::neutral" onclick="onlyOne(this)" validation="">  <label for="Doctors have the best interests of people of my ethnic group in mind:::neutral" >neutral</label><br/>      <input class="Doctors have the best interests of people of my ethnic group in mind" type="radio" id="Doctors have the best interests of people of my ethnic group in mind:::disagree" name="Doctors have the best interests of people of my ethnic group in mind:::disagree" value="Doctors have the best interests of people of my ethnic group in mind:::disagree" onclick="onlyOne(this)" validation="">  <label for="Doctors have the best interests of people of my ethnic group in mind:::disagree" >disagree</label><br/>      <input class="Doctors have the best interests of people of my ethnic group in mind" type="radio" id="Doctors have the best interests of people of my ethnic group in mind::: strongly disagree" name="Doctors have the best interests of people of my ethnic group in mind::: strongly disagree" value="Doctors have the best interests of people of my ethnic group in mind::: strongly disagree" onclick="onlyOne(this)" validation="">  <label for="Doctors have the best interests of people of my ethnic group in mind::: strongly disagree" > strongly disagree</label><br/>  </fieldset>
+</form>
+<br>
+<Strong>Demographic Information</Strong>  <br>
+<Strong> </Strong>  <br>
+<form action="/action_page.php">  <fieldset>  <legend>What is your gender identity?</legend>      <input class="What is your gender identity?" type="radio" id="What is your gender identity?:::Woman" name="What is your gender identity?:::Woman" value="What is your gender identity?:::Woman" onclick="onlyOne(this)" validation="">  <label for="What is your gender identity?:::Woman" >Woman</label><br/>      <input class="What is your gender identity?" type="radio" id="What is your gender identity?:::Man" name="What is your gender identity?:::Man" value="What is your gender identity?:::Man" onclick="onlyOne(this)" validation="">  <label for="What is your gender identity?:::Man" >Man</label><br/>      <input class="What is your gender identity?" type="radio" id="What is your gender identity?:::Non-binary" name="What is your gender identity?:::Non-binary" value="What is your gender identity?:::Non-binary" onclick="onlyOne(this)" validation="">  <label for="What is your gender identity?:::Non-binary" >Non-binary</label><br/>      <input class="What is your gender identity?" type="radio" id="What is your gender identity?:::Prefer not to disclose" name="What is your gender identity?:::Prefer not to disclose" value="What is your gender identity?:::Prefer not to disclose" onclick="onlyOne(this)" validation="">  <label for="What is your gender identity?:::Prefer not to disclose" >Prefer not to disclose</label><br/>      <input class="What is your gender identity?" type="radio" id="What is your gender identity?:::Prefer to self-describe (please specify)" name="What is your gender identity?:::Prefer to self-describe (please specify)" value="What is your gender identity?:::Prefer to self-describe (please specify)" onclick="onlyOne(this)" validation="">  <label for="What is your gender identity?:::Prefer to self-describe (please specify)" >Prefer to self-describe (please specify)</label><br/> <input class="What is your gender identity?" type="text" id="What is your gender identity?:::free_response" name="What is your gender identity?:::free_response" >  <label for="What is your gender identity?:::free_response" Entire a label not listed here></label><br/>  </fieldset>
+</form>
+<br>
+<form action="/action_page.php">  <fieldset>  <legend>What is your current age?</legend>  <input class="What is your current age?" style="" type="number" id="What is your current age?:::text_box" name="What is your current age?:::text_box" validation="">  <label for="What is your current age?:::text_box" ></label><br/>  </fieldset>
+</form>
+<br>
+<form action="/action_page.php">  <fieldset>  <legend>Which of the following best describe your current occupational status? Mark all that apply.</legend><table><tr><td><label for="Which of the following best describe your current occupational status? Mark all that apply.:::Employed" ><input class="Which of the following best describe your current occupational status? Mark all that apply." type="checkbox" id="Which of the following best describe your current occupational status? Mark all that apply.:::Employed" name="Which of the following best describe your current occupational status? Mark all that apply.:::Employed" value="Which of the following best describe your current occupational status? Mark all that apply.:::Employed" onclick="whetherNone(this)" validation="">  Employed</label><br/></td></tr><tr><td><label for="Which of the following best describe your current occupational status? Mark all that apply.:::Unemployed for 1 year or more" ><input class="Which of the following best describe your current occupational status? Mark all that apply." type="checkbox" id="Which of the following best describe your current occupational status? Mark all that apply.:::Unemployed for 1 year or more" name="Which of the following best describe your current occupational status? Mark all that apply.:::Unemployed for 1 year or more" value="Which of the following best describe your current occupational status? Mark all that apply.:::Unemployed for 1 year or more" onclick="whetherNone(this)" validation="">  Unemployed for 1 year or more</label><br/></td></tr><tr><td><label for="Which of the following best describe your current occupational status? Mark all that apply.:::Unemployed for less than 1 year" ><input class="Which of the following best describe your current occupational status? Mark all that apply." type="checkbox" id="Which of the following best describe your current occupational status? Mark all that apply.:::Unemployed for less than 1 year" name="Which of the following best describe your current occupational status? Mark all that apply.:::Unemployed for less than 1 year" value="Which of the following best describe your current occupational status? Mark all that apply.:::Unemployed for less than 1 year" onclick="whetherNone(this)" validation="">  Unemployed for less than 1 year</label><br/></td></tr><tr><td><label for="Which of the following best describe your current occupational status? Mark all that apply.:::Homemaker" ><input class="Which of the following best describe your current occupational status? Mark all that apply." type="checkbox" id="Which of the following best describe your current occupational status? Mark all that apply.:::Homemaker" name="Which of the following best describe your current occupational status? Mark all that apply.:::Homemaker" value="Which of the following best describe your current occupational status? Mark all that apply.:::Homemaker" onclick="whetherNone(this)" validation="">  Homemaker</label><br/></td></tr><tr><td><label for="Which of the following best describe your current occupational status? Mark all that apply.:::Student" ><input class="Which of the following best describe your current occupational status? Mark all that apply." type="checkbox" id="Which of the following best describe your current occupational status? Mark all that apply.:::Student" name="Which of the following best describe your current occupational status? Mark all that apply.:::Student" value="Which of the following best describe your current occupational status? Mark all that apply.:::Student" onclick="whetherNone(this)" validation="">  Student</label><br/></td></tr><tr><td><label for="Which of the following best describe your current occupational status? Mark all that apply.:::Retired" ><input class="Which of the following best describe your current occupational status? Mark all that apply." type="checkbox" id="Which of the following best describe your current occupational status? Mark all that apply.:::Retired" name="Which of the following best describe your current occupational status? Mark all that apply.:::Retired" value="Which of the following best describe your current occupational status? Mark all that apply.:::Retired" onclick="whetherNone(this)" validation="">  Retired</label><br/></td></tr><tr><td><label for="Which of the following best describe your current occupational status? Mark all that apply.:::Disabled" ><input class="Which of the following best describe your current occupational status? Mark all that apply." type="checkbox" id="Which of the following best describe your current occupational status? Mark all that apply.:::Disabled" name="Which of the following best describe your current occupational status? Mark all that apply.:::Disabled" value="Which of the following best describe your current occupational status? Mark all that apply.:::Disabled" onclick="whetherNone(this)" validation="">  Disabled</label><br/></td></tr><tr><td><label for="Which of the following best describe your current occupational status? Mark all that apply.:::Other" ><input class="Which of the following best describe your current occupational status? Mark all that apply." type="checkbox" id="Which of the following best describe your current occupational status? Mark all that apply.:::Other" name="Which of the following best describe your current occupational status? Mark all that apply.:::Other" value="Which of the following best describe your current occupational status? Mark all that apply.:::Other" onclick="whetherNone(this)" validation="">  Other</label><br/></td></tr></table>  </fieldset>
+</form>
+<br>
+<form action="/action_page.php">  <fieldset>  <legend> What is the highest grade or level of schooling you completed?</legend>      <input class=" What is the highest grade or level of schooling you completed?" type="radio" id=" What is the highest grade or level of schooling you completed?:::Less than 8 years" name=" What is the highest grade or level of schooling you completed?:::Less than 8 years" value=" What is the highest grade or level of schooling you completed?:::Less than 8 years" onclick="onlyOne(this)" validation="">  <label for=" What is the highest grade or level of schooling you completed?:::Less than 8 years" >Less than 8 years</label><br/>      <input class=" What is the highest grade or level of schooling you completed?" type="radio" id=" What is the highest grade or level of schooling you completed?:::8 through 11 years" name=" What is the highest grade or level of schooling you completed?:::8 through 11 years" value=" What is the highest grade or level of schooling you completed?:::8 through 11 years" onclick="onlyOne(this)" validation="">  <label for=" What is the highest grade or level of schooling you completed?:::8 through 11 years" >8 through 11 years</label><br/>      <input class=" What is the highest grade or level of schooling you completed?" type="radio" id=" What is the highest grade or level of schooling you completed?:::12 years or completed high school" name=" What is the highest grade or level of schooling you completed?:::12 years or completed high school" value=" What is the highest grade or level of schooling you completed?:::12 years or completed high school" onclick="onlyOne(this)" validation="">  <label for=" What is the highest grade or level of schooling you completed?:::12 years or completed high school" >12 years or completed high school</label><br/>      <input class=" What is the highest grade or level of schooling you completed?" type="radio" id=" What is the highest grade or level of schooling you completed?:::Post high school training other than college (vocational or technical)" name=" What is the highest grade or level of schooling you completed?:::Post high school training other than college (vocational or technical)" value=" What is the highest grade or level of schooling you completed?:::Post high school training other than college (vocational or technical)" onclick="onlyOne(this)" validation="">  <label for=" What is the highest grade or level of schooling you completed?:::Post high school training other than college (vocational or technical)" >Post high school training other than college (vocational or technical)</label><br/>      <input class=" What is the highest grade or level of schooling you completed?" type="radio" id=" What is the highest grade or level of schooling you completed?:::Some college" name=" What is the highest grade or level of schooling you completed?:::Some college" value=" What is the highest grade or level of schooling you completed?:::Some college" onclick="onlyOne(this)" validation="">  <label for=" What is the highest grade or level of schooling you completed?:::Some college" >Some college</label><br/>      <input class=" What is the highest grade or level of schooling you completed?" type="radio" id=" What is the highest grade or level of schooling you completed?:::College graduate" name=" What is the highest grade or level of schooling you completed?:::College graduate" value=" What is the highest grade or level of schooling you completed?:::College graduate" onclick="onlyOne(this)" validation="">  <label for=" What is the highest grade or level of schooling you completed?:::College graduate" >College graduate</label><br/>      <input class=" What is the highest grade or level of schooling you completed?" type="radio" id=" What is the highest grade or level of schooling you completed?:::Postgraduate" name=" What is the highest grade or level of schooling you completed?:::Postgraduate" value=" What is the highest grade or level of schooling you completed?:::Postgraduate" onclick="onlyOne(this)" validation="">  <label for=" What is the highest grade or level of schooling you completed?:::Postgraduate" >Postgraduate</label><br/>  </fieldset>
+</form>
+<br>
+<form action="/action_page.php">  <fieldset>  <legend>Are you of Hispanic or Latino origin or descent?</legend>      <input class="Are you of Hispanic or Latino origin or descent?" type="radio" id="Are you of Hispanic or Latino origin or descent?:::Yes, Hispanic or Latino" name="Are you of Hispanic or Latino origin or descent?:::Yes, Hispanic or Latino" value="Are you of Hispanic or Latino origin or descent?:::Yes, Hispanic or Latino" onclick="onlyOne(this)" validation="">  <label for="Are you of Hispanic or Latino origin or descent?:::Yes, Hispanic or Latino" >Yes, Hispanic or Latino</label><br/>      <input class="Are you of Hispanic or Latino origin or descent?" type="radio" id="Are you of Hispanic or Latino origin or descent?:::No, not Hispanic or Latino" name="Are you of Hispanic or Latino origin or descent?:::No, not Hispanic or Latino" value="Are you of Hispanic or Latino origin or descent?:::No, not Hispanic or Latino" onclick="onlyOne(this)" validation="">  <label for="Are you of Hispanic or Latino origin or descent?:::No, not Hispanic or Latino" >No, not Hispanic or Latino</label><br/>  </fieldset>
+</form>
+<br>
+<form action="/action_page.php">  <fieldset>  <legend>What race or races do you consider yourself to be?</legend><table><tr><td><label for="What race or races do you consider yourself to be?:::White" ><input class="What race or races do you consider yourself to be?" type="checkbox" id="What race or races do you consider yourself to be?:::White" name="What race or races do you consider yourself to be?:::White" value="What race or races do you consider yourself to be?:::White" onclick="whetherNone(this)" validation="">  White</label><br/></td></tr><tr><td><label for="What race or races do you consider yourself to be?:::Black or African American" ><input class="What race or races do you consider yourself to be?" type="checkbox" id="What race or races do you consider yourself to be?:::Black or African American" name="What race or races do you consider yourself to be?:::Black or African American" value="What race or races do you consider yourself to be?:::Black or African American" onclick="whetherNone(this)" validation="">  Black or African American</label><br/></td></tr><tr><td><label for="What race or races do you consider yourself to be?:::American Indian or Alaska Native" ><input class="What race or races do you consider yourself to be?" type="checkbox" id="What race or races do you consider yourself to be?:::American Indian or Alaska Native" name="What race or races do you consider yourself to be?:::American Indian or Alaska Native" value="What race or races do you consider yourself to be?:::American Indian or Alaska Native" onclick="whetherNone(this)" validation="">  American Indian or Alaska Native</label><br/></td></tr><tr><td><label for="What race or races do you consider yourself to be?:::Asian" ><input class="What race or races do you consider yourself to be?" type="checkbox" id="What race or races do you consider yourself to be?:::Asian" name="What race or races do you consider yourself to be?:::Asian" value="What race or races do you consider yourself to be?:::Asian" onclick="whetherNone(this)" validation="">  Asian</label><br/></td></tr><tr><td><label for="What race or races do you consider yourself to be?:::Native Hawaiian or Other Pacific Islander" ><input class="What race or races do you consider yourself to be?" type="checkbox" id="What race or races do you consider yourself to be?:::Native Hawaiian or Other Pacific Islander" name="What race or races do you consider yourself to be?:::Native Hawaiian or Other Pacific Islander" value="What race or races do you consider yourself to be?:::Native Hawaiian or Other Pacific Islander" onclick="whetherNone(this)" validation="">  Native Hawaiian or Other Pacific Islander</label><br/></td></tr><tr><td><label for="What race or races do you consider yourself to be?:::Some other race" ><input class="What race or races do you consider yourself to be?" type="checkbox" id="What race or races do you consider yourself to be?:::Some other race" name="What race or races do you consider yourself to be?:::Some other race" value="What race or races do you consider yourself to be?:::Some other race" onclick="whetherNone(this)" validation="">  Some other race</label><br/></td></tr><tr><td><label for="What race or races do you consider yourself to be?:::Prefer to self-describe (please specify)" ><input class="What race or races do you consider yourself to be?" type="checkbox" id="What race or races do you consider yourself to be?:::Prefer to self-describe (please specify)" name="What race or races do you consider yourself to be?:::Prefer to self-describe (please specify)" value="What race or races do you consider yourself to be?:::Prefer to self-describe (please specify)" onclick="whetherNone(this)" validation="">  Prefer to self-describe (please specify)</label><br/></td></tr><tr><td colspan="1"><div style="float:left; display:flex; flex-direction:row;"> <input class="What race or races do you consider yourself to be?" type="text" id="What race or races do you consider yourself to be?:::free_response" name="What race or races do you consider yourself to be?:::free_response">  <label for="What race or races do you consider yourself to be?:::free_response" Entire a label not listed here></label></div></td</tr></table>  </fieldset>
+</form>
+<br>
+<form action="/action_page.php">  <fieldset>  <legend>Please feel free to leave any comments about our study (optional)</legend> <ul class="likert" style="text-align: center;">  <li><label for="Please feel free to leave any comments about our study (optional):::text_box" ></label> <input class="Please feel free to leave any comments about our study (optional)" style="" type="text" id="Please feel free to leave any comments about our study (optional):::text_box" name="Please feel free to leave any comments about our study (optional):::text_box" validation="" > </li> <br/> </ul> </fieldset>
+</form>
+<br>
+
+    </div>
+  </div>
+</div>
+
+
+      <!--- LAYOUT GOES ABOVE  --->
+
+      <div>
+        <p>
+          <div class="text-center">
+            <a class="btn btn-secondary" href="#" role="button" onclick="click_to_prev()">Move backward</a>
+            <a class="btn btn-secondary" href="#" role="button" onclick="click_to_next()">Move forward</a>
+          </div>
+        </p>        
+      </div>
+
+      <hr>
+      <footer>
+        <div class="row">
+          <div class="col-md-6">
+            <p>Copyright &copy; 2022 <a href="https://blablablab.si.umich.edu/">Blablablab</a> </p>
+          </div>
+          <div class="col-md-12 text-md-right">
+            <a href="https://github.com/davidjurgens/potato" class="text-dark">Fork on GitHub</a>
+            <span class="text-muted mx-2">|</span> 
+            <a href="https://github.com/davidjurgens/potato#cite-us" class="text-dark">Cite Us</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      /* Set the width of the sidebar to 250px (show it) */
+      function openNav(target_id, width = "350px") {
+          document.getElementById(target_id).style.width = width;
+      }
+      
+      /* Set the width of the sidebar to 0 (hide it) */
+      function closeNav(target_id) {
+          document.getElementById(target_id).style.width = "0";
+      }
+
+      function closeNav2(target_id) {
+          // document.getElementById(target_id).style.height = "20px";
+          console.error(document.getElementById(target_id).style.display);
+          if (document.getElementById(target_id).style.display == "block" 
+              || document.getElementById(target_id).style.display == "") {
+              
+              document.getElementById(target_id).style.display = "none";
+              localStorage.setItem('show_instructions', 'false'); 
+          }
+          else{
+              document.getElementById(target_id).style.display = "block";
+              localStorage.setItem('show_instructions', 'true'); 
+          }
+      }
+
+      /* Keep the instructions hidden/shown across instance transitions based on
+         what the user had selected */      
+      window.onload = function() {
+          var show = localStorage.getItem('show_instructions');
+          if (document.getElementById('instructions')) {
+              if (show === 'true') {
+                  document.getElementById('instructions').style.display = "block";
+              }
+              else {
+                  document.getElementById('instructions').style.display = "none";
+              }
+          }
+      }      
+
+    </script>
+  </body>
+</html>

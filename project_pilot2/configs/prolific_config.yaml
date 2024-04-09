@@ -1,0 +1,8 @@
+{
+
+    "token": 'WHOENoIs2Gv6I8d3zdnWX7FNtNgA_lwgsh5FGnMsPZutdeDmnEsyi07YObhuig4YWx0v2F_1VaYwZbqQj0odogY1cniTyCI0HC1qia84zAFo8eYNo4kfWCpu',
+    "study_id": '660c20451bc12711c48db350',
+
+    "max_concurrent_sessions": 30,
+    "workload_checker_period": 300
+}

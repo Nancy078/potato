@@ -607,18 +607,41 @@ def load_all_data(config):
 
         logger.debug("Reading data from " + data_fname)
 
+        # if fmt in ["json", "jsonl"]:
+        #     with open(data_fname, "rt") as f:
+        #         for line_no, line in enumerate(f):
+        #             item = json.loads(line)
+
+        #             # fix the encoding
+        #             # item[text_key] = item[text_key].encode("latin-1").decode("utf-8")
+
+        #             instance_id = item[id_key]
+
+        #             # TODO: check for duplicate instance_id
+        #             instance_id_to_data[instance_id] = item
         if fmt in ["json", "jsonl"]:
             with open(data_fname, "rt") as f:
-                for line_no, line in enumerate(f):
-                    item = json.loads(line)
+                data = json.load(f)
 
-                    # fix the encoding
+                for item in data:
+                    # fix the encoding if needed
                     # item[text_key] = item[text_key].encode("latin-1").decode("utf-8")
 
                     instance_id = item[id_key]
 
                     # TODO: check for duplicate instance_id
                     instance_id_to_data[instance_id] = item
+
+                # for line_no, line in enumerate(f):
+                #     item = json.loads(line)
+
+                #     # fix the encoding
+                #     # item[text_key] = item[text_key].encode("latin-1").decode("utf-8")
+
+                #     instance_id = item[id_key]
+
+                #     # TODO: check for duplicate instance_id
+                #     instance_id_to_data[instance_id] = item
 
         else:
             sep = "," if fmt == "csv" else "\t"
@@ -636,7 +659,7 @@ def load_all_data(config):
                 instance_id_to_data[instance_id] = item
             line_no = len(df)
 
-        logger.debug("Loaded %d instances from %s" % (line_no, data_fname))
+        # logger.debug("Loaded %d instances from %s" % (line_no, data_fname))
 
     # TODO Setup automatic test questions for each annotation schema,
     # currently we are doing it similar to survey flow to allow multilingual test questions

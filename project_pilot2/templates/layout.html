@@ -1,0 +1,514 @@
+<style>
+    * {
+        box-sizing: border-box;
+   
+    }
+
+    .row {
+        display: flex;
+        flex-direction: row;
+    }
+
+    
+
+    .redText
+    {
+        display: block;
+        background-color:rgb(250, 255, 238) ;
+        color: rgb(15, 15, 15);
+        padding: 3px; /* Adjust padding as needed */
+        border-radius: 8px; 
+    }
+    .blueText
+    {
+        display: block;
+        padding: 3px; /* Adjust padding as needed */
+        border-radius: 8px; /* Optional: adds rounded corners */
+        color: rgb(15, 15, 15);
+        background-color:rgb(244, 249, 255);
+        
+       
+    }
+
+    .greenText
+    {
+        display: block;
+        padding: 3px; /* Adjust padding as needed */
+        border-radius: 8px; /* Optional: adds rounded corners */
+        color: rgb(15, 15, 15);
+        background-color:rgb(255, 245, 253) ;
+    }
+
+    .orangeText
+    {
+        display: block;
+        padding: 3px; /* Adjust padding as needed */
+        border-radius: 8px; /* Optional: adds rounded corners */
+        color: rgb(15, 15, 15);
+        background-color:rgb(255, 246, 229);
+    }
+
+
+    /*                 border:1px solid black;
+        border-radius: 5px; */
+
+    
+    /* Create two equal columns that sits next to each other */
+    .column {
+        flex: 50%;
+        padding: 10px;
+    }
+/* 
+    .instance_text {
+    width: 100%;
+    padding: 10px;
+    box-sizing: content-box;
+    } */
+
+    .instance_text {
+        position: relative;
+        padding: 5px;
+        background-color: #ffffff00;
+        /* min-width: 5000px; */
+        margin-right: 30px;
+        margin-left: 0%;
+    }
+
+    /* .instance_text {
+        min-width: 400px;
+        margin-bottom: 10px;
+        position:sticky;
+        position: -webkit-sticky;
+        top: 10px;
+        z-index: 100;
+    } */
+
+    .container {
+        /* min-width: 2000px; */
+        border: 1px solid #ffffff;
+        padding: 5px;
+    }
+/* 
+    .sticky-instance {
+        margin: 0;
+        position: -webkit-sticky;
+        position: sticky;
+        top: 10px;
+        z-index: 100;
+    } */
+
+    .annotation_schema {
+        /* width: 100%; */
+        /* padding: 15px; */
+        line-height: 1.2;
+        box-sizing: content-box;width: 100%;
+        display: block; /* Change to block to make forms stack vertically */
+        /* margin-bottom: 10px;
+        margin-right: 0%;
+        margin-left: 0%;
+        margin-top:10px;
+        margin-inline: 10px;
+        margin-block-start: 0%;
+        margin-inline-start: 0%;
+        border-radius: 10px;  */
+        padding: 1px;
+        margin-inline: 10px;
+        border-radius: 10px;
+        
+    }
+
+    .annotation_schema form fieldset {
+        display: block;
+        /* flex-wrap: wrap; */
+        gap: 3px;
+        /* text-align: right; */
+        /* flex-direction: row; */
+        align-items: start;
+        border-radius: 10px;
+    }
+
+    table {
+    width: 100%; /* Adjust the width as necessary */
+    border-collapse: collapse; /* Remove space between borders */
+    }
+
+
+    table td, 
+    table th {
+        padding: 7px; /* Reduce padding inside table cells; adjust as desired */
+        /* text-align: right; Align text to the left; adjust as needed */
+        vertical-align: text-bottom; /* Align the content to the top of the cell */
+    }
+
+
+    /* Blue background color for even rows */
+    .annotation_schema table tr:nth-child(even) {
+        background-color: #f8fcff; /* Light blue background */
+    }
+
+    /* White background color for odd rows */
+    .annotation_schema table tr:nth-child(odd) {
+        background-color: white; /* or #FFFFFF for white background */
+    }
+
+    table tr {
+        height: auto; /* Adjust row height as desired */
+    }
+
+    .annotation_schema table {
+        font-size: 14px; 
+        border-radius: 10px;
+    }
+
+    .annotation_schema table td {
+    white-space: pre-line; /* Prevents text from wrapping */
+    font-size: 14px; 
+    /* border-radius: 10px; */
+    /* Add any other styles that should apply to table cells */
+}
+    .annotation_schema table tbody tr:first-child td {
+        white-space: nowrap; /* Prevents text from wrapping in the first row */
+        font-size: 14px; /* Keep your font size from other rules */
+        padding: 8.5px; /* Adjust padding as needed */
+        /* other styles... */
+    }
+
+    .annotation_schema table tbody tr:not(:first-child) td {
+        white-space: normal; /* Allows text to wrap in rows other than the first */
+        /* other styles... */
+    }
+
+    /* Style specific to the radio buttons */
+    input[type='radio'] {
+        margin-right: 50px; 
+        margin-left: 20px; 
+    }
+
+    /* Optional: Add a class to your table rows in the HTML and target it here */
+    .table-row { /* This class should be added to the <tr> elements */
+        line-height: 0; /* Decrease line-height to reduce vertical spacing */
+    }
+
+     
+    .annotation_schema form fieldset legend {
+        min-width: 650px; 
+        /* text-align: left; */
+      
+        margin-left: 0px;
+        margin-inline-start: 0px;
+        border-radius: 10px;
+        padding: 8px;
+    }
+
+    .annotation_schema form fieldset label {
+  
+   display: inline-block; /* or block, depending on your layout requirements */
+    width: 80%; /* Adjust according to your layout, could be a percentage or fixed width */
+    margin: 0px;
+    border-radius: 10px;
+    padding: 0px;
+
+   
+    }
+
+
+    
+    .instance {
+       
+        border: 1px solid #e8f3fe;
+        background-color: cccccc;
+        /* width: 800px; */
+        min-width:400px;
+        max-width: 700px;
+        border-radius: 10px;
+        padding: 10px;
+        display: block;
+        justify-content: center;
+        /* width: fit-content; */
+        /* min-width: 400px; */
+        text-align: left;
+        margin: 0 auto;
+        font-size: 11.5pt;
+        position:relative;
+        left:-105px;
+        /* position: sticky;
+        position: -webkit-sticky; */
+        top: 0; 
+    }
+
+    .instance p {
+        font-weight: bold;
+        display: block;
+       
+    }
+   
+    
+    fieldset {
+        background-color: #ffffff00;
+        border:1px solid #ffffff00;
+      
+        padding: 0px;
+        /* padding: 10px 15px 10px 15px; */
+    }
+    
+    legend {
+        /* background-color: #e3f0fc; */
+        background-color: #edf6ff;
+        color: rgb(0, 0, 0);
+        padding: 0px;
+        /* padding: 5px 5px; */
+        font-size: 12pt;
+        font-weight: normal;
+    }
+
+    input[type="text"] {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;  
+        box-sizing: border-box;
+        width: 100%;
+    }
+
+      
+    input {
+        margin: 5px;
+    }
+
+
+    .likert li {
+        float: inline-start;
+        list-style-type: none;
+    }
+
+
+    /* The sidepanel menu */
+    .sidepanel {
+        min-height: 250px; /* Specify a height */
+        width: 0; /* 0 width - change this with JavaScript */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Stay on top */
+        top: 95px;
+        left: 1px;
+        background-color: #77b1c1; /* Black*/
+        overflow-x: hidden; /* Disable horizontal scroll */
+        padding-top: 10px; /* Place content 60px from the top */
+        padding-bottom: 20px;
+        transition: 0.5s; /* 0.5 second transition effect to slide in the sidepanel */
+    }
+
+    /* The sidepanel links */
+    .sidepanel a {
+        padding: 8px 8px 8px 32px;
+        text-decoration: none;
+        font-size: 55px;
+        color: #ffffff; /* #818181; */
+        display: block;
+        transition: 0.3s;
+    }
+
+    /* When you mouse over the navigation links, change their color */
+    .sidepanel a:hover {
+        color: #f1f1f1;
+    }
+
+    /* When you mouse over the navigation links, change their color */
+    .sidepanel table {
+        color: #ffffff;
+        font-size: 20px;
+        /*padding: 8px 8px 18px 62px;*/
+        margin-left: 20px;
+        margin-top: 10px;
+        border-spacing: 10px;
+    }
+    
+    .sidepanel td, th  {
+        color: #ffffff;
+        padding: 5px;
+    }
+
+    .sidepanel tr:nth-child(even) {
+        background-color: #a4c6cb;
+    }
+    
+
+    
+    /* Position and style the close button (top right corner) */
+    .sidepanel .closebtn {
+        position: absolute;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+        margin-left: 50px;
+    }
+
+    /* Style the button that is used to open the sidepanel */
+    .openbtn {
+        cursor: pointer;
+        /*
+        font-size: 20px;                
+        background-color: #111;
+        color: white;
+        padding: 10px 15px;
+        border: none;*/
+    }
+
+    .openbtn:hover {
+        background-color: #444;
+    } 
+
+    /* The instructions */
+    .instructions {
+        /* width: 0; */ /* 0 width - change this with JavaScript */
+        transition: 0.5s; /* 0.5 second transition effect to slide in the sidepanel */
+        overflow-y: hidden; /* Disable horizontal scroll */
+        border:1px solid #070707;
+        background-color: cccccc;
+        border-radius: 5px;
+        padding: 15px;
+        display: block;
+        justify-content: center;
+        width: fit-content;
+        max-width: 80%;
+        text-align: left;
+        margin: 0 auto;
+        font-size: 12pt;               
+    }
+
+    
+    /* Position and style the close button (top right corner) */
+    .instructions .closebtn {
+        position: absolute;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+        margin-left: 50px;
+    }
+
+    /* Style the button that is used to open the sidepanel */
+    .instructions .openbtn {
+        cursor: pointer;
+        /*
+        font-size: 20px;                
+        background-color: #111;
+        color: white;
+        padding: 10px 15px;
+        border: none;*/
+    }
+
+    .span_container {
+      border-width:3px;
+      border-style:solid;
+      border: 2px solid rgb(0, 0, 0);
+      position: relative;
+      border-radius: 5px;
+      padding: 2px 5px;
+      background-color: rgb(132, 131, 133);
+    }
+    
+    .span_label {
+    position: absolute;
+    top: -12px;
+    left: 5px;
+    font-size: 7px;
+    padding: 1px 1px;
+    border-radius: 3px;
+    background-color: rgb(192, 229, 255);
+    border: 2px solid rgb(148, 210, 255);
+    text-align: center;
+    }            
+    
+</style>
+
+<div style="align:center; display:block; justify-content:center;" align="center">
+    <a href="javascript:void(0)" target_id="instructions" onclick="closeNav2 (this.getAttribute('target_id'))">Show/Hide instructions</a>
+  </div>
+  <div class="instructions" id="instructions">
+
+    <p><b>Instructions</b>: 
+        This project aims to understand how people perceive doctor’s communication during their interactions with patients. You will see short snippets from various conversations between doctors and patients. You will be asked to rate how you feel about the doctor’s communication on several scales (e.g., respectfulness). In each conversation, the patient is diagnosed with prostate cancer and the doctor talks to him about his treatments. The doctor might talk about: the patient's health condition, a new trial or treatment, his eligibility to enroll in the trial, and the doctor’s recommendations. The conversation may include dialogue between doctors and family members/healthcare workers, but our focus is on the doctor.
+        
+        </p>
+    <p>  Imagine you’re the patient in each snippet. From your perspective as the patient, you will rate the doctor’s qualities based on what the doctor says in each snippet. (For instance, based on the doctor’s behavior, do you think the doctor regards you, the patient, as a good communicator? ). You should rate based on the doctor’s general tone. In the rare case where you can’t judge one of the qualities, you can put “can’t tell”. Please rate these based on your understanding of the qualities. You can use the left and right arrow keys to move backward and forward.  For best viewing experience, please maximize your browser window to full screen.</p>
+    
+    <!-- <p>For your convenience, some qualities are defined briefly below:
+        <ul>
+          <li> <b>Competence</b>: The ability to reason, understand relevant information, and assess the situation and its consequences
+          </li>
+          
+          <li> <b>Agency</b>: The ability to contribute and decide on treatment, being an active participant.
+
+          </li>
+          
+          <li> <b>Support</b>: Shows genuine care, putting the patient at ease, reassuring them, and demonstrating concern for their well-being
+
+          </li>
+
+          <li> <b>Partnership</b>:  Encourages open communication, treating the patient as an equal, soliciting their concerns, and thoughts on their treatment and health
+
+
+          </li>
+
+
+        </ul>
+      </p> -->
+
+  </div>
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-12">
+                    <div name="context_text" class="instance">
+                        <div name="instance_text" style="min-width: 625px;">
+                            
+                                {{instance | safe}}
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="annotation_schema" style="min-width: 650px;">
+                       
+                        {{annotation_schematic}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- 
+
+
+
+<div class="row">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-12">
+  
+          <div name="context_text" class="instance">
+            <div name="instance_text" style="max-width:400px;">
+              {{instance | safe}}
+            </div>
+          </div>
+            <div class="annotation_schema" style="display: grid;grid-template-columns: repeat(1, 1fr);gap: 20px;grid-auto-rows: auto; max-width:400px;">
+                {{annotation_schematic}}
+            </div>
+        </div>
+      </div>
+      <div style="height: 15px;" />
+  
+    </div>
+    <div class="col-md-12">
+    </div>
+  </div>
+
+  -->

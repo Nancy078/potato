@@ -1,0 +1,399 @@
+{
+    "port": 8880,
+
+    "server_name": "potato annotator",
+
+    "annotation_task_name": "Doctor Patient Conversation Analysis",
+    
+    "prolific": {
+    "config_file_path": 'configs/prolific_config.yaml'
+    },
+
+
+    # Potato will write the annotation file for all annotations to this
+    # directory, as well as per-annotator output files and state information
+    # necessary to restart annotation.
+    "output_annotation_dir": "annotation_output/",
+
+    # The output format for the all-annotator data. Allowed formats are:
+    # * jsonl
+    # * json (same output as jsonl)
+    # * csv
+    # * tsv
+    #
+    "output_annotation_format": "tsv",
+
+    # If annotators are using a codebook, this will be linked at the top to the
+    # instance for easy access
+#     "annotation_codebook_url": "https://docs.google.com/document/d/16ZV4P9lwR8lWbfXLOwvcw7xV4QVGtHXygw1lzo-A3jY/edit?usp=sharing",
+
+    "surveyflow": {
+      "on": True,
+    
+     "order": [
+            "pre_annotation",
+            "post_annotation"
+        ],
+
+      "pre_annotation": [
+        # {'file':'surveyflow/instruction.jsonl','text':'Overview of the task'}
+        {'file':'surveyflow/instruction.jsonl','text':'Overview'}],
+  
+      "post_annotation": [ 
+
+
+      {'file':'surveyflow/post_annotation_question.jsonl','text':"Thank you for your valuable contributions to our study! Our goal is to understand how doctors can communicate better with patients by looking at different perceptions of the doctors’ qualities. Understanding your personal experiences with the medical system will help us to contextualize your responses. We invite you to share insights by answering the following questions. Your answers to these questions are strictly confidential and anonymous."}, 
+       {'file':'surveyflow/end_fin.jsonl','text':'End of survey'}
+      
+      ],
+       
+      # If set, we will automatically generate testing questions similar to the annotation instances, but explicitly ask the annotator to choose one option
+      "testing": [],
+    },
+
+
+    "data_files": [
+    
+       "data/pilot_study_sample_653_snips_516.json"
+    ],
+
+    "item_properties": {
+        "id_key": "id",
+        "text_key": "text",
+        # "context_key": "context"
+    },
+
+
+   
+    "automatic_assignment": {
+      #whether do automatic task assignment for annotators, default False.
+      "on": True,
+      "output_filename": 'task_assignment.json',
+      "sampling_strategy": 'random',
+
+      "labels_per_instance": 4,
+      # "instance_per_annotator": 1,
+      "instance_per_annotator": 15,
+      "test_question_per_annotator": 0, # you must set up the test question in surveyflow to use this function
+
+      "users": [  ],
+    },
+
+
+    "user_config": {
+
+      "allow_all_users": True,
+      
+      "users": [  ],
+    },
+
+    "login": {
+        "type": "url_direct",
+        "url_argument": "PROLIFIC_PID"
+    },
+
+    #the jumping-to-id function will be disabled if "jumping_to_id_disabled" is True
+    "jumping_to_id_disabled": False,
+
+    #the navigation bar will be hidden to the annotators if "hide_navbar" is True
+    "hide_navbar": True,
+
+    #list_as_text is used when the input text is actually a list of texts, usually used for best-worst-scaling or dialogue analysis
+    "list_as_text": {
+      "text_list_prefix_type": 'none', #whether automatically insert a prefix for each line, currently supporting 'number', 'alphabet', 'number'
+      "horizontal": True,
+    },
+
+    # How many seconds do you want the annotators spend on each instance, after
+    # that, an alert will be sent per alert_time_each_instance seconds.
+    "alert_time_each_instance": 10000000,
+
+    "annotation_schemes": [
+
+        {
+            "annotation_type": "multirate",
+            "arrangement": "vertical",
+            "name": "select_appropriateness",
+            "option_randomization": True,
+            "description": "From your perspective as the patient, to what extent does the doctor show the following qualities in the current snippet?",
+            "labels": ["not at all", "slightly", "moderately", "very", "extremely", "can't tell"],
+            "options": [
+
+                {"name": "pos_partnership", "label": "<div style=\"background-color:#ffffff00;text-align: right\">encourages you to <b>share your opinions</b></div>", },
+               
+                {"name": "pos_support", "label": "<div style=\"background-color:#ffffff00;text-align: right\"> is <b>supportive</b> of you</div>", },
+               
+               {"name": "pos_info", "label": "<div style=\"background-color:#ffffff00;text-align: right\">gives <b>thorough and clear information</b></div>", },
+               
+               {"name": "pos_warm", "label": "<div style=\"background-color:#ffffff00;text-align: right\">is <b>warm or kind</b> towards you</div>", },
+               
+               {"name": "pos_empathetic", "label": "<div style=\"background-color:#ffffff00;text-align: right\">is <b>empathetic</b> towards you</div>", },
+
+              {"name": "pos_respect", "label": "<div style=\"background-color:#ffffff00;text-align: right\">is <b>respectful</b> towards you</div>", },
+
+              {"name": "pos_communicator", "label": "<div style=\"background-color:#ffffff00;text-align: right\">thinks you are <b>engaged</b> in the conversation and are <b>communicating</b> your preferences</div>", },
+               
+               {"name": "pos_agency", "label": "<div style=\"background-color:#ffffff00;text-align: right\">thinks you can <b>contribute</b> to the <b>conversation and decision-making</b></div>", },
+               
+               {"name": "pos_competence", "label": "<div style=\"background-color:#ffffff00;text-align: right\">thinks you <b>understand</b> the situation</div>", },
+              
+
+            ],
+            "grouped_options": [
+
+
+              {'group_name':'competence', 'grouped_choices':[
+               {"name": "pos_competence", "label": "<div style=\"background-color:#ffffff00\">Does the doctor think you  <b>understand and can reason about</b> the situation?</div>", },
+                {"name": "inv_competence", "label": "<div style=\"background-color:#ffffff00\">Does the doctor <b>doubt your understanding and ability to reason about</b> the situation?</div>", }]
+                },
+               
+               {'group_name':'agency', 'grouped_choices':[
+                {"name": "pos_agency", "label": "<div style=\"background-color:#ffffff00\">Does the doctor view you as an <b>active participant</b> in the conversation?</div>", },
+                {"name": "inv_agency", "label": "<div style=\"background-color:#ffffff00\">Does the doctor see you as a <b>passive participant</b> in the conversation?</div>", },]
+                },
+               
+               {'group_name':'communicator','grouped_choices':[
+                {"name": "pos_communicator", "label": "<div style=\"background-color:#ffffff00\">How good of a <b>communicator</b> do you think the doctor views you?</div>", },
+                {"name": "inv_communicator", "label": "<div style=\"background-color:#ffffff00\">Do you think the doctor views you as a <b>poor communicator?</b></div>", },
+                 ]},
+
+               {'group_name':'respect','grouped_choices':[
+
+                {"name": "pos_respect", "label": "<div style=\"background-color:#ffffff00\">How <b>respectful</b> is the doctor?</div>", },
+                {"name": "inv_respect", "label": "<div style=\"background-color:#ffffff00\">Does the doctor <b>lack respect?</b></div>", },
+               ]
+               },
+
+               {'group_name':'empathetic', 'grouped_choices':[
+                {"name": "pos_empathetic", "label": "<div style=\"background-color:#ffffff00\">How <b>empathetic</b> is the doctor?</div>", },
+                 {"name": "inv_empathetic", "label": "<div style=\"background-color:#ffffff00\">Does the doctor <b>lack empathy</b>?</div>", },
+            ]},
+              
+              {'group_name':'warm', 'grouped_choices':[
+                  {"name": "pos_warm", "label": "<div style=\"background-color:#ffffff00\">How <b>warm</b> is the doctor?</div>", },
+                  {"name": "inv_warm", "label": "<div style=\"background-color:#ffffff00\">Does the doctor <b>lack warmth</b>?</div>", },
+            ]},
+              
+              {'group_name':'info', 'grouped_choices':[
+
+                {"name": "pos_info", "label": "<div style=\"background-color:#ffffff00\">Does the doctor give <b>thorough and clear information</b>?</div>", },
+                {"name": "inv_info", "label": "<div style=\"background-color:#ffffff00\">Does the doctor give <b> vague and confusing information</b>?</div>", },
+            ]},
+
+              {'group_name':'support', 'grouped_choices':[
+                {"name": "pos_support", "label": "<div style=\"background-color:#ffffff00\">Does the doctor show <b>care</b> towards you?</div>", },
+                {"name": "inv_support", "label": "<div style=\"background-color:#ffffff00\">Does the doctor show <b>indifference</b> towards you?</div>", },
+            ]},
+              
+              {'group_name':'partnership', 'grouped_choices':[
+                {"name": "pos_partnership", "label": "<div style=\"background-color:#ffffff00\">Does the doctor encourage you to <b>share your opinions</b>?</div>", },
+                {"name": "inv_partnership", "label": "<div style=\"background-color:#ffffff00\">Does the doctor <b>discourage you from sharing your opinions</b>?</div>", },
+            ]},
+             
+            ],
+
+            'has_free_response': False,                      
+            "display_config": {
+                "num_columns": 1,
+                "show_labels_once": True,
+              }
+        },    
+    #   {
+    #       "annotation_type": "radio",
+    #       "name": "observer_competence",
+    #       "description": "From an observer's POV, how competent do you think the patient sounds?",
+
+    #       # If true, display the labels horizontally
+    #       "horizontal": True,
+
+    #       "labels": [
+    #          "low", "slightly low", "medium", "slightly high", "high","N/A"
+    #       ],
+    #       "sequential_key_binding": True,
+    #   },
+
+    #   {
+    #       "annotation_type": "radio",
+    #       "name": "patient_competence",
+    #       "description": "From the patient's POV, how competent do you think the doctor views you?",
+
+    #       # If true, display the labels horizontally
+    #       "horizontal": True,
+
+    #       "labels": [
+    #          "low", "slightly low", "medium", "slightly high", "high","N/A"
+    #       ],
+    #       "sequential_key_binding": True,
+    #   },
+
+    # #   {
+    # #       "annotation_type": "radio",
+    # #       "name": "observer_agency",
+    # #       "description": "From an observer's POV, how much agency do you think the patient has?",
+
+    # #       # If true, display the labels horizontally
+    # #       "horizontal": True,
+
+    # #       "labels": [
+    # #          "low", "slightly low", "medium", "slightly high", "high","N/A"
+    # #       ],
+    # #       "sequential_key_binding": True,
+    # #   },
+
+    #   {
+    #       "annotation_type": "radio",
+    #       "name": "patient_agency",
+    #       "description": "From the patient's POV, how much agency do you think the doctor thinks you have?",
+
+    #       # If true, display the labels horizontally
+    #       "horizontal": True,
+
+    #       "labels": [
+    #          "low", "slightly low", "medium", "slightly high", "high","N/A"
+    #       ],
+    #       "sequential_key_binding": True,
+    #   },
+
+    # #   {
+    # #       "annotation_type": "radio",
+    # #       "name": "observer_communicator",
+    # #       "description": "From an observer's POV, how good of a communicator is the patient?",
+
+    # #       # If true, display the labels horizontally
+    # #       "horizontal": True,
+
+    # #       "labels": [
+    # #          "low", "slightly low", "medium", "slightly high", "high","N/A"
+    # #       ],
+    # #       "sequential_key_binding": True,
+    # #   },
+
+    #   {
+    #       "annotation_type": "radio",
+    #       "name": "patient_communicator",
+    #       "description": "From the patient's POV, how good of a communicator do you think the doctor views you?",
+
+    #       # If true, display the labels horizontally
+    #       "horizontal": True,
+
+    #       "labels": [
+    #          "low", "slightly low", "medium", "slightly high", "high","N/A"
+    #       ],
+    #       "sequential_key_binding": True,
+    #   },
+
+    #   {
+    #       "annotation_type": "radio",
+    #       "name": "patient_respect",
+    #       "description": "From the patient's POV, how respectful is the doctor?",
+
+    #       # If true, display the labels horizontally
+    #       "horizontal": True,
+
+    #       "labels": [
+    #          "low", "slightly low", "medium", "slightly high", "high","N/A"
+    #       ],
+    #       "sequential_key_binding": True,
+    #   },
+
+    #   {
+    #       "annotation_type": "radio",
+    #       "name": "patient_empathy",
+    #       "description": "From the patient's POV, how empathetic is the doctor?",
+
+    #       # If true, display the labels horizontally
+    #       "horizontal": True,
+
+    #       "labels": [
+    #          "low", "slightly low", "medium", "slightly high", "high","N/A"
+    #       ],
+    #       "sequential_key_binding": True,
+    #   },
+
+    #   {
+    #       "annotation_type": "radio",
+    #       "name": "patient_warmth",
+    #       "description": "From the patient's POV, how warm is the doctor?",
+
+    #       # If true, display the labels horizontally
+    #       "horizontal": True,
+
+    #       "labels": [
+    #          "low", "slightly low", "medium", "slightly high", "high","N/A"
+    #       ],
+    #       "sequential_key_binding": True,
+    #   },
+
+    #   {
+    #       "annotation_type": "radio",
+    #       "name": "patient_info",
+    #       "description": "From the patient's POV, how informative is the doctor?",
+
+    #       # If true, display the labels horizontally
+    #       "horizontal": True,
+
+    #       "labels": [
+    #          "low", "slightly low", "medium", "slightly high", "high","N/A"
+    #       ],
+    #       "sequential_key_binding": True,
+    #   },
+
+    #   {
+    #       "annotation_type": "radio",
+    #       "name": "patient_support",
+    #       "description": "From the patient's POV, how supportive is the doctor?",
+
+    #       # If true, display the labels horizontally
+    #       "horizontal": True,
+
+    #       "labels": [
+    #          "low", "slightly low", "medium", "slightly high", "high","N/A"
+    #       ],
+    #       "sequential_key_binding": True,
+    #   },
+
+    #   {
+    #       "annotation_type": "radio",
+    #       "name": "patient_partner",
+    #       "description": "From the patient's POV, how much does the doctor build partnership?",
+
+    #       # If true, display the labels horizontally
+    #       "horizontal": False,
+
+    #       "labels": [
+    #          "low", "slightly low", "medium", "slightly high", "high","N/A"
+    #       ],
+    #       "sequential_key_binding": True,
+    #   },
+
+    ],
+
+    # The html that changes the visualiztation for your task. Change this file
+    # to influence the layout and description of your task. This is not a full
+    # HTML page, just the piece that does lays out your task's pieces
+    # you may use templates in our lib, if you want to use your own template,
+    # please replace the string as a path to the template
+   
+    # "html_layout": "../templates/Doctor-Patient-Conversation-Analysis- copy.html",
+
+    "html_layout": "templates/layout.html",
+    "surveyflow_html_layout": "default",
+
+    # The core UI files for Potato. You should not need to change these normally.
+    #
+    # Exceptions to this might include: 
+    # 1) You want to add custom CSS/fonts to style your task
+    # 2) Your layout requires additional JS/assets to render
+    # 3) You want to support additional keybinding magic
+    #
+    # if you want to use your own template,
+    # please replace the string as a path to the template
+    # "base_html_template": "../../potato/templates/Doctor-Patient-Conversation-Analysis-base_template.html",
+    # "base_html_template": "../templates/Dialogue-Analysis-Dialogue-Analysis-base_template copy.html",
+    "base_html_template": "default",
+    "header_file": "default",
+
+    # This is where the actual HTML files will be generated
+    "site_dir": "default",
+
+}
